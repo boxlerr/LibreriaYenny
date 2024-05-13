@@ -1,0 +1,46 @@
+Readme - Sistema de Gestión de Librería
+Este archivo README proporciona una visión general del sistema de gestión de una librería desarrollado por [ACM3AP].
+
+Descripción
+El Sistema de Gestión de Librería es una aplicación diseñada para automatizar y facilitar las operaciones diarias en una librería. Permite gestionar el inventario de libros, clientes, ventas y compras, proporcionando herramientas eficientes para el personal de la librería.
+
+Funcionalidades Principales
+Gestión de Inventario: Permite agregar, modificar y eliminar libros en el inventario de la librería.
+Gestión de Clientes: Permite registrar y actualizar información de los clientes que visitan la librería.
+Registro de Ventas y Compras: Facilita el registro de ventas realizadas a clientes y compras realizadas a proveedores.
+Reportes: Genera reportes detallados sobre las ventas, compras y estado del inventario.
+Requisitos del Sistema
+Java 8 o superior.
+MySQL Server.
+Librería mysql-connector-java-5.1.13 para conectividad con la base de datos.
+Instalación
+Clona este repositorio en tu máquina local.
+Importa el proyecto en tu IDE preferido.
+Asegúrate de tener configurada una instancia de MySQL Server.
+Configura la conexión a la base de datos en el archivo config.properties.
+Ejecuta el script SQL proporcionado en la carpeta sql para crear la estructura de la base de datos.
+Ejecuta la aplicación desde tu IDE o utilizando el archivo JAR generado.
+
+ *Configuración BASE DE DATOS
+El archivo config.properties contiene la configuración de la base de datos. 
+Asegúrate de actualizar los valores según la configuración de tu entorno:
+
+Copy code
+db.url=jdbc:mysql://localhost:3306/libreria
+db.user=root
+db.password=password
+
+~Uso
+#Inicia la aplicación.
+#Accede con las credenciales de usuario proporcionadas.
+#Utiliza las diferentes opciones del menú para gestionar el inventario, clientes, ventas y compras.
+#Genera reportes según sea necesario.
+
+	Contribuidores
+ * Boxler Julian
+ * Bianchini Eros
+ * Nuñez Diego
+ * Varela Alexander
+
+
+¡Gracias por utilizar nuestro Sistema de Gestión de Librería! Si tienes alguna pregunta o problema, no dudes en ponerte en contacto con nosotros.
