@@ -1,3 +1,4 @@
+package modelos;
 
 public abstract class Usuario {
 	private String nombre;

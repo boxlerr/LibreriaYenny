@@ -1,3 +1,4 @@
+package controlador;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +19,10 @@ public class DatabaseConnection {
     private DatabaseConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            JOptionPane.showMessageDialog(null, "Se conecto");
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error conecto");
+
             e.printStackTrace();
         }
     }
