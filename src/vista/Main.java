@@ -1,8 +1,16 @@
+package vista;
 import javax.swing.JOptionPane;
+
+import controlador.DatabaseConnection;
+import modelos.*;
 
 class Main {
 
 	public static void main(String[] args) {
+		
+		
+		 DatabaseConnection.getInstance().getConnection();
+		
 		
 		Libro harrypotter = new Libro ("Harry Potter", "J. K. Rowling", true);
 		Libro señordelosanillos = new Libro ("El señor de los anillos", "Tolkien", true);
