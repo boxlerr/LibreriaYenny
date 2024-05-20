@@ -39,12 +39,25 @@ class Main {
 				
 			switch (inicio) {
 			case 0:
+				//login admin: admin - 1234
 				JOptionPane.showMessageDialog(null, "Ingresa como empleado");
-				String nombre = JOptionPane.showInputDialog("Ingrese su nombre");
 				String ape = JOptionPane.showInputDialog("Ingrese su apellido");
-				String indentificador =JOptionPane.showInputDialog("Ingrese su indentificador de empleado");
-				Empleado empleado = new Empleado (nombre, ape, indentificador);
-				empleado.Ingreso(indentificador, biblioteca);
+				
+				int intentos=3;
+				
+				
+					do {
+						String usuario = JOptionPane.showInputDialog("Ingrese nombre de usuario");
+						String contraseña =JOptionPane.showInputDialog("Ingrese contraseña");
+						if (contraseña.equals("1234")&&usuario.equals("admin")) {
+							Empleado empleado = new Empleado (usuario, ape, contraseña);
+							empleado.Ingreso(contraseña, biblioteca, ape);
+							intentos=0;
+						} else {
+							intentos--;
+							JOptionPane.showMessageDialog(null, "Nombre de usuario o contraseña incorrecta \nIntentos restantes " + intentos);
+						}
+					} while (intentos>0);
 				break;
 				
 			case 1:
