@@ -23,7 +23,7 @@ public class Cliente extends Usuario {
 	}
 	
 	@Override
-	public void Ingreso(String identificador, Biblioteca biblioteca) {
+	public void Ingreso(String identificador, Biblioteca biblioteca, String ape) {
 		String[] opciones = {"Ver lista de libros disponibles","Pedir prestado un libro","Devolver un libro", "Salir"};
 		int ele=0;
 		do {
