@@ -9,7 +9,7 @@ public abstract class Usuario {
 		this.apellido = apellido;
 	}
 	
-	public void Ingreso(String identificador, Biblioteca biblioteca) {
+	public void Ingreso(String identificador, Biblioteca biblioteca, String ape) {
 		
 	}
 	
