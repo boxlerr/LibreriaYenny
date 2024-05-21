@@ -29,7 +29,7 @@ class Main {
 		
 		
 		
-		String[] opciones = {"Empleado","Cliente","Terminar el día"};
+		String[] opciones = {"Gerente","Empleado","Cliente","Terminar el día"};
 		int inicio;
 		
 		do {
@@ -39,12 +39,23 @@ class Main {
 				
 			switch (inicio) {
 			case 0:
+				
+				JOptionPane.showMessageDialog(null, "Ingresa como gerente");
+				String usuario1 = JOptionPane.showInputDialog("Ingrese su nombre de usuario");
+				String ape1 = JOptionPane.showInputDialog("Ingrese su apellido");
+				String cuit = JOptionPane.showInputDialog("Ingrese su cuit");
+				
+				Gerente gerente = new Gerente (usuario1, ape1, cuit, 0);
+				gerente.Ingreso(cuit, biblioteca, ape1);
+				
+				break;
+				
+			case 1:
 				//login admin: admin - 1234
 				JOptionPane.showMessageDialog(null, "Ingresa como empleado");
 				String ape = JOptionPane.showInputDialog("Ingrese su apellido");
 				
 				int intentos=3;
-				
 				
 					do {
 						String usuario = JOptionPane.showInputDialog("Ingrese nombre de usuario");
@@ -60,7 +71,7 @@ class Main {
 					} while (intentos>0);
 				break;
 				
-			case 1:
+			case 2:
 				JOptionPane.showMessageDialog(null, "Ingresa como cliente");
 				String nombre2 = JOptionPane.showInputDialog("Ingrese su nombre");
 				String ape2 = JOptionPane.showInputDialog("Ingrese su apellido");
@@ -68,13 +79,14 @@ class Main {
 				Cliente cliente = new Cliente (nombre2, ape2, indentificador2);
 				cliente.Ingreso(indentificador2, biblioteca, ape2);
 				break;
-			case 2:
+				
+			case 3:
 				JOptionPane.showMessageDialog(null, "Préstamos realizados:\n" + biblioteca.getPrestamos());
 				JOptionPane.showMessageDialog(null, "Libros disponibles:\n" + biblioteca.getLibrosdisponibles());
 				JOptionPane.showMessageDialog(null, "Se cierra el sistema por hoy, que tenga buena noche!");
 				break;
 			}
-		} while (inicio!=2);
+		} while (inicio!=3);
 
 	}
 
