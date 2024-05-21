@@ -66,7 +66,7 @@ class Main {
 				String ape2 = JOptionPane.showInputDialog("Ingrese su apellido");
 				String indentificador2 =JOptionPane.showInputDialog("Ingrese su indentificador");
 				Cliente cliente = new Cliente (nombre2, ape2, indentificador2);
-				cliente.Ingreso(indentificador2, biblioteca);
+				cliente.Ingreso(indentificador2, biblioteca, ape2);
 				break;
 			case 2:
 				JOptionPane.showMessageDialog(null, "Préstamos realizados:\n" + biblioteca.getPrestamos());
