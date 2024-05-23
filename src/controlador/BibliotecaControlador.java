@@ -26,7 +26,7 @@ public class BibliotecaControlador implements libraryRepository{
 	            ResultSet resultSet = statement.executeQuery();
 	       
 	            while (resultSet.next()) {
-	            	Biblioteca library = new Biblioteca(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+	            	Biblioteca library = new Biblioteca(resultSet.getInt("id"), resultSet.getString("nombre"), resultSet.getString("apellido"));
 	            	librarys.add(library);
 	            }
 	        } catch (SQLException e) {
