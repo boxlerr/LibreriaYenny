@@ -43,4 +43,25 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 	
+	public boolean IniciarSesion(String nombre,String apellido) {
+		if (nombre.length()>=4 && apellido.length()>=4) {
+				
+			if (this.getApellido().equals(apellido)){
+				if( this.getNombre().equals(nombre)) {
+					return true;
+				} else {
+					//Error nombre
+					return false;
+				}
+						
+			} else {
+				//Error apellido
+				return false;
+			}
+		} else {
+			return false;
+	
+		}
+	}
+	
 }
