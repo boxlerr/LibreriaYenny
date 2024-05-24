@@ -1,6 +1,8 @@
 package vista;
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.Connection;
+
 import controlador.DatabaseConnection;
 import modelos.*;
 
@@ -9,12 +11,12 @@ class Main {
 	public static void main(String[] args) {
 		
 		
-		 DatabaseConnection.getInstance().getConnection();
+		DatabaseConnection.getInstance().getConnection();
 		
 		
 		Libro harrypotter = new Libro ("Harry Potter", "J. K. Rowling", true);
-		Libro señordelosanillos = new Libro ("El señor de los anillos", "Tolkien", true);
-		Libro gaturro = new Libro ("Gaturro", "Nick", true);
+		Libro señordelosanillos = new Libro ("El señor de los anillos", "J. R. R. Tolkien", true);
+		Libro gaturro = new Libro ("Gaturro", "Nik", true);
 		Libro ryj = new Libro ("Romeo y Julieta", "Shakespeare", true);
 		Libro hamlet = new Libro ("Hamlet", "Shakespeare", true);
 		

@@ -1,7 +1,5 @@
 package controlador;
 
-
-import modelos.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.UserRepository;
+import modelos.Usuario;
 
 public class UsuarioControlador implements UserRepository {
     private final Connection connection;
@@ -22,11 +21,11 @@ public class UsuarioControlador implements UserRepository {
     public List<Usuario> getAllUsers() {
         List<Usuario> users = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users ");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
             ResultSet resultSet = statement.executeQuery();
        
             while (resultSet.next()) {
-            	Usuario user = new Usuario(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+            	Usuario user = new Usuario(resultSet.getString("nombre"), resultSet.getString("apellido"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -45,7 +44,7 @@ public class UsuarioControlador implements UserRepository {
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
-                user = new Usuario(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("email"));
+                user = new Usuario(resultSet.getString("nombre"), resultSet.getString("apellido"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,9 +55,9 @@ public class UsuarioControlador implements UserRepository {
 	@Override
     public void addUser(Usuario usuario) {
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email) VALUES (?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (nombre, apellido) VALUES (?, ?)");
             statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getEmail());
+            statement.setString(2, usuario.getApellido());
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
@@ -72,9 +71,9 @@ public class UsuarioControlador implements UserRepository {
 	@Override
     public void updateUser(Usuario usuario) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET nombre = ?, apellido = ? WHERE id = ?");
             statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getEmail());
+            statement.setString(2, usuario.getApellido());
             statement.setInt(3, usuario.getId());
             
             int rowsUpdated = statement.executeUpdate();
