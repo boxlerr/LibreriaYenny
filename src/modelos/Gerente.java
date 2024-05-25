@@ -3,41 +3,79 @@ package modelos;
 import javax.swing.JOptionPane;
 
 public class Gerente extends Usuario {
-	private String cuit;
-	private int idsucursal;
+	private int idGerente;
+	private String nombre;
+	private String apellido;
+	private int dni;
+	private int idSucursal_fk;
 	
-	public Gerente(String nombre, String apellido, String cuit, int idsucursal) {
-		super(nombre, apellido);
-		this.cuit = cuit;
-		this.idsucursal = idsucursal;
-
+	public Gerente(String mail, String contraseña, String tipo, String nombre, String apellido, int dni, int idSucursal_fk) {
+		super(mail, contraseña, tipo);
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.idSucursal_fk = idSucursal_fk;
 	}
-	
+	public Gerente(String mail, String contraseña, String tipo, int idGerente, String nombre, String apellido, int dni, int idSucursal_fk) {
+		super(mail, contraseña, tipo);
+		this.idGerente = idGerente;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.idSucursal_fk = idSucursal_fk;
+	}
+
 	@Override
 	public String toString() {
-		return "Gerente [cuit=" + cuit + ", idsucursal=" + idsucursal + "]";
-	}
-
-	public String getCuit() {
-		return cuit;
-	}
-
-	public void setCuit(String cuit) {
-		this.cuit = cuit;
-	}
-
-	public int getIdsucursal() {
-		return idsucursal;
-	}
-
-	public void setIdsucursal(int idsucursal) {
-		this.idsucursal = idsucursal;
+		return "Gerente [idGerente=" + idGerente + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", idSucursal_fk=" + idSucursal_fk + "]";
 	}
 
 
+	public int getIdGerente() {
+		return idGerente;
+	}
+
+	public void setIdGerente(int idGerente) {
+		this.idGerente = idGerente;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public int getIdSucursal_fk() {
+		return idSucursal_fk;
+	}
+
+	public void setIdSucursal_fk(int idSucursal_fk) {
+		this.idSucursal_fk = idSucursal_fk;
+	}
+
+	
 	@Override
-	public void Ingreso (String identificador, Biblioteca biblioteca, String apellido) {
-		String[] opciones = {"Administrar libros","Administrar cuentas", "Detalles de los libros del inventario", "Salir"};
+	public void Ingreso () {
+		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Salir"};
 		int ele=0;
 		
 		do {
