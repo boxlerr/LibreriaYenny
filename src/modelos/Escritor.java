@@ -52,7 +52,7 @@ public class Escritor extends Usuario {
 	
 	@Override
 	public void Ingreso () {
-		String[] opciones = {"Enviar propuesta de libro","Ver estado de propuesta","Ver estado de produccion del libro", "Salir"};
+		String[] opciones = {"Enviar propuesta de libro","Ver estado de propuesta","Ver estado de produccion del libro", "Cerrar sesión"};
 		int ele=0;
 		do {
 			ele = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Empleado - ", 0, 0, null, opciones, opciones[0]);
