@@ -9,7 +9,7 @@ public interface UserRepository {
 	//prototipos de metodos 
     List<Usuario> getAllUsers(); // llama a todos los usuarios de la bdd
     
-    Usuario getUserById(int id); //llama solo a uno, por su id
+    Usuario getUserById(String mail, String contraseña); //llama solo a uno, por su id
     
     void addUser(Usuario user); //añade usuarios a la bdd
     

@@ -2,13 +2,65 @@ package modelos;
 import javax.swing.JOptionPane;
 
 public class Empleado extends Usuario {
-	private String idempleado;
+	private int idEmpleado;
+	private String nombre;
+	private String apellido;
+	private int dni;
+	private int idSucursal_fk;
 	
-
-	public Empleado(String nombre, String apellido, String idempleado) {
-		super(nombre, apellido);
-		this.idempleado = idempleado;
+	public Empleado(String mail, String contraseña, String tipo, String nombre, String apellido, int dni, int idSucursal_fk) {
+		super(mail, contraseña, tipo);
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.idSucursal_fk = idSucursal_fk;
 	}
+	public Empleado(String mail, String contraseña, String tipo, int idEmpleado, String nombre, String apellido, int dni, int idSucursal_fk) {
+		super(mail, contraseña, tipo);
+		this.idEmpleado = idEmpleado;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.idSucursal_fk = idSucursal_fk;
+	}
+
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", idSucursal_fk=" + idSucursal_fk + "]";
+	}
+	
+	public int getIdEmpleado() {
+		return idEmpleado;
+	}
+	public void setIdEmpleado(int idEmpleado) {
+		this.idEmpleado = idEmpleado;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	public int getDni() {
+		return dni;
+	}
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+	public int getIdSucursal_fk() {
+		return idSucursal_fk;
+	}
+	public void setIdSucursal_fk(int idSucursal_fk) {
+		this.idSucursal_fk = idSucursal_fk;
+	}
+	
 	
 	public void VerLista (Biblioteca biblioteca) {
 		JOptionPane.showMessageDialog(null, biblioteca.getLibrosdisponibles());
@@ -25,49 +77,34 @@ public class Empleado extends Usuario {
 	}
 
 	@Override
-	public void Ingreso (String identificador, Biblioteca biblioteca, String ape) {
-		String[] opciones = {"Ver lista de libros disponibles","Prestar libro","Registrar devolución de libro", "Ver lista de préstamos", "Salir"};
+	public void Ingreso () {
+		String[] opciones = {"Vender libro","Prestar libro","Ver inventario", "Registrar devolucion de libro", "Ver lista de préstamos", "Salir"};
 		int ele=0;
 		do {
-			ele = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Empleado - " + ape, 0, 0, null, opciones, opciones[0]);
+			ele = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Empleado - ", 0, 0, null, opciones, opciones[0]);
 			
 			switch (ele) {
 			case 0:
-				this.VerLista(biblioteca);
+				
 				break;
 			case 1:
-				this.Prestar(biblioteca);
+				
 				break;
 			case 2:
-				this.Devolucion(biblioteca);
+				
 				break;
 			case 3:
-				if(!biblioteca.getPrestamos().isEmpty()) {
-					JOptionPane.showMessageDialog(null, biblioteca.getPrestamos());
-					} else {
-						JOptionPane.showMessageDialog(null, "No se han realizado préstamos aún");
-					}
+				
 				break;
 			case 4:
+				
+				break;
+			case 5:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
 				break;
 	
 			}
-		} while (ele!=4);
+		} while (ele!=5);
 	}
-
-	@Override
-	public String toString() {
-		return "Empleado [idempleado=" + idempleado + "]";
-	}
-
-	public String getIdempleado() {
-		return idempleado;
-	}
-
-	public void setIdempleado(String idempleado) {
-		this.idempleado = idempleado;
-	}
-	
 	
 }
