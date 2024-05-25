@@ -75,7 +75,7 @@ public class Gerente extends Usuario {
 	
 	@Override
 	public void Ingreso () {
-		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Salir"};
+		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Cerrar sesión"};
 		int ele=0;
 		
 		do {

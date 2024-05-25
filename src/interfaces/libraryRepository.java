@@ -7,13 +7,13 @@ import modelos.Biblioteca;
 public interface libraryRepository {
 
 	//prototipos de metodos 
-    List<Biblioteca> getAllLibrarys(); // llama a todos los usuarios de la bdd
+    List<Biblioteca> getAllLibrarys(); 
     
-    Biblioteca getLibraryById(int id); //llama solo a uno, por su id
+    Biblioteca getLibraryById(int id); 
     
-    void addLibrary(Biblioteca Library); //añade usuarios a la bdd
+    void addLibrary(Biblioteca Library);
     
-    void updateLibrary(Biblioteca Library); //actualiza los usuarios de la bdd
+    void updateLibrary(Biblioteca Library); 
     
-    void deleteLibrary(int id); //eliminar usuarios de la bdd
+    void deleteLibrary(int id);
 }
