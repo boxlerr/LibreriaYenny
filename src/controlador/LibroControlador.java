@@ -54,6 +54,90 @@ public class LibroControlador implements LibroRepository {
         }
         return libro;
     }
+    
+    @Override
+	public List<Libro> getLibrosBySucursal(int idsucursal) {
+    	List<Libro> libros = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM libro WHERE idSucursal_fk = ?");
+            statement.setInt(1, idsucursal);
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            	libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+		
+	}
+    
+    @Override
+	public Libro getLibroByTitulo(String titulo) {
+    	Libro libro = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM libro WHERE titulo = ?");
+            statement.setString(1, titulo);
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libro;
+    }
+    
+    @Override
+    public List<Libro> getLibrosByAutor(String autor) {
+    	List<Libro> libros = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM libro WHERE autor = ?");
+            statement.setString(1, autor);
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	if (libros==null) {
+            		libros = new ArrayList<>();
+				}
+            	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            	libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+		
+	}
+    
+    @Override
+    public List<Libro> getLibrosByGenero(String genero) {
+    	List<Libro> libros = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM libro WHERE genero = ?");
+            statement.setString(1, genero);
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	if (libros==null) {
+            		libros = new ArrayList<>();
+				}
+            	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            	libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
+		
+	}
 
 //    @Override
 //    public Usuario getUserById(String mail, String contraseña) {

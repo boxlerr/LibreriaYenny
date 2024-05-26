@@ -28,7 +28,7 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", genero=" + genero
-				+ ", stock=" + stock + ", idSucursal_fk=" + idSucursal_fk + "]";
+				+ ", stock=" + stock + ", idSucursal_fk=" + idSucursal_fk + "]\n";
 	}
 
 	public int getIdLibro() {

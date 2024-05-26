@@ -52,6 +52,23 @@ public class BibliotecaControlador implements libraryRepository{
         }
         return biblioteca;
     }
+	
+	@Override
+	public Biblioteca getLibraryByNombre(String nombre) {
+		Biblioteca biblioteca = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM biblioteca WHERE nombre = ?");
+            statement.setString(1, nombre);
+            ResultSet resultSet = statement.executeQuery();
+       
+            while (resultSet.next()) {
+            	biblioteca = new Biblioteca(resultSet.getInt("idSucursal"), resultSet.getString("nombre"), resultSet.getString("dirección"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return biblioteca;
+    }
 
 	@Override
 	public void addLibrary(Biblioteca Library) {

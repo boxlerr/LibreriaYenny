@@ -81,7 +81,8 @@ public class Empleado extends Usuario {
 
 	@Override
 	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
-		String[] opciones = {"Vender libro","Prestar libro","Ver inventario", "Registrar devolucion de libro", "Ver lista de préstamos", "Cerrar sesión"};
+		String[] opciones = {"Vender libro","Prestar libro","Ver inventario", "Registrar devolucion de libro", "Ver lista de préstamos", 
+				"Ver lista de ventas", "Cerrar sesión"};
 		int ele=0;
 		do {
 			ele = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Empleado - ", 0, 0, null, opciones, opciones[0]);
@@ -103,6 +104,9 @@ public class Empleado extends Usuario {
 				
 				break;
 			case 5:
+				
+				break;
+			case 6:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
 				break;
 	
