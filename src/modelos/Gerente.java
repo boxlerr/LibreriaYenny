@@ -136,8 +136,8 @@ public class Gerente extends Usuario {
 				
 			case 2:
 				
-				String[] opciones3 = {"Ver todo el inventario", "Ver inventario de esta sucursal", "Buscar por título", "Buscar por id",
-						"Buscar por autor", "Buscar por sucursal", "Buscar por género", "Volver"};
+				String[] opciones3 = {"Ver todo el inventario", "Ver inventario por sucursal", "Buscar por título", "Buscar por id",
+						"Buscar por autor", "Buscar por género", "Volver"};
 				
 				int ele3 = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Gerente - " + apellido, 0, 0, null, opciones3, opciones3[0]);
 				
@@ -151,32 +151,57 @@ public class Gerente extends Usuario {
 					break;
 
 				case 1:
+					String[] bibliotecas = {"Once", "Belgrano", "Abasto"};
+					String opcionselect = (String) JOptionPane.showInputDialog(null, "Seleccione sucursal", null, 0, null, bibliotecas, bibliotecas[0]);
+					
+					JOptionPane.showMessageDialog(null, "Sucursal: " + bibliotecaControlador.getLibraryByNombre(opcionselect) + "\nInventario: \n" +
+							libroControlador.getLibrosBySucursal(bibliotecaControlador.getLibraryByNombre(opcionselect).getIdSucursal()));
 					
 					break;
 					
 				case 2:
+					String titulo=JOptionPane.showInputDialog("Ingrese el título del libro que desea buscar");
+					if (libroControlador.getLibroByTitulo(titulo)!=null) {
+						JOptionPane.showMessageDialog(null, libroControlador.getLibroByTitulo(titulo)+ "\nSe encuentra en la sucursal: \n" + 
+					bibliotecaControlador.getLibraryById(libroControlador.getLibroByTitulo(titulo).getIdSucursal_fk()));
+					} else {
+						JOptionPane.showMessageDialog(null, "Ese titulo/libro no se encuentra en nuestra base de datos");
+					}
 					
 					break;
 				
 				case 3:
 					int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del libro que busca"));
-					JOptionPane.showMessageDialog(null, libroControlador.getLibroById(id) + "\n Se encuentra en la sucursal: \n" + bibliotecaControlador.getLibraryById(libroControlador.getLibroById(id).getIdSucursal_fk()));
+					if (libroControlador.getLibroById(id)!=null) {
+						JOptionPane.showMessageDialog(null, libroControlador.getLibroById(id) + "\nSe encuentra en la sucursal: \n" + 
+					bibliotecaControlador.getLibraryById(libroControlador.getLibroById(id).getIdSucursal_fk()));
+					} else {
+						JOptionPane.showMessageDialog(null, "No se encontró ningun libro con ese id");
+					}
 					break;
 					
 				case 4:
+					String autor=JOptionPane.showInputDialog("Ingrese el autor");
+					if (libroControlador.getLibrosByAutor(autor)!=null) {
+						JOptionPane.showMessageDialog(null, "Autor: " + autor + "\nLibros: \n" + libroControlador.getLibrosByAutor(autor));
+					} else {
+						JOptionPane.showMessageDialog(null, "No se encontró ningun libro de ese autor");
+					}
 					
 					break;
 				case 5:
-					
+					String genero=JOptionPane.showInputDialog("Ingrese el género");
+					if (libroControlador.getLibrosByGenero(genero)!=null) {
+						JOptionPane.showMessageDialog(null, "Género: " + genero + "\nLibros: \n" + libroControlador.getLibrosByGenero(genero));
+					} else {
+						JOptionPane.showMessageDialog(null, "No se encontró ningun libro de ese género");
+					}
 					break;
 				
 				case 6:
 					
 					break;
 					
-				case 7:
-					
-					break;
 				}
 				
 				break;

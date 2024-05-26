@@ -11,9 +11,13 @@ public interface libraryRepository {
     
     Biblioteca getLibraryById(int id); 
     
+    Biblioteca getLibraryByNombre(String nombre);
+    
     void addLibrary(Biblioteca Library);
     
     void updateLibrary(Biblioteca Library); 
     
     void deleteLibrary(int id);
+
+	
 }
