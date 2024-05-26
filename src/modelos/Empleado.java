@@ -1,6 +1,9 @@
 package modelos;
 import javax.swing.JOptionPane;
 
+import controlador.BibliotecaControlador;
+import controlador.LibroControlador;
+
 public class Empleado extends Usuario {
 	private int idEmpleado;
 	private String nombre;
@@ -77,7 +80,7 @@ public class Empleado extends Usuario {
 //	}
 
 	@Override
-	public void Ingreso () {
+	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
 		String[] opciones = {"Vender libro","Prestar libro","Ver inventario", "Registrar devolucion de libro", "Ver lista de préstamos", "Cerrar sesión"};
 		int ele=0;
 		do {

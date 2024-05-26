@@ -17,6 +17,8 @@ class Main {
 		GerenteControlador gerenteControlador = new GerenteControlador();
 		EmpleadoControlador empleadoControlador = new EmpleadoControlador();
 		EscritorControlador escritorControlador = new EscritorControlador();
+		LibroControlador libroControlador = new LibroControlador();
+		BibliotecaControlador bibliotecaControlador = new BibliotecaControlador();
 		
 		
 		int inicio;
@@ -43,15 +45,15 @@ class Main {
 					case "gerente":
 						
 						JOptionPane.showMessageDialog(null, "Ingresa como gerente: " + gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)));
-						gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)).Ingreso();
+						gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
 						break;
 					case "empleado":
 						JOptionPane.showMessageDialog(null, "Ingresa como empleado: " + empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)));
-						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)).Ingreso();
+						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
 						break;
 					case "escritor":
 						JOptionPane.showMessageDialog(null, "Ingresa como escritor: " + escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)));
-						escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)).Ingreso();
+						escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
 						break;
 
 

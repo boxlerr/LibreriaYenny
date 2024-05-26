@@ -1,5 +1,8 @@
 package modelos;
 
+import controlador.BibliotecaControlador;
+import controlador.LibroControlador;
+
 public class Usuario {
 	private int id;
 	private String mail;
@@ -60,7 +63,7 @@ public class Usuario {
 	
 	
 	
-	public void Ingreso() {
+	public void Ingreso(LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
 		
 	}
 

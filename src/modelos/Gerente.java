@@ -2,6 +2,9 @@ package modelos;
 
 import javax.swing.JOptionPane;
 
+import controlador.BibliotecaControlador;
+import controlador.LibroControlador;
+
 public class Gerente extends Usuario {
 	private int idGerente;
 	private String nombre;
@@ -74,7 +77,7 @@ public class Gerente extends Usuario {
 
 	
 	@Override
-	public void Ingreso () {
+	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
 		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Cerrar sesión"};
 		int ele=0;
 		
@@ -132,6 +135,49 @@ public class Gerente extends Usuario {
 				break;
 				
 			case 2:
+				
+				String[] opciones3 = {"Ver todo el inventario", "Ver inventario de esta sucursal", "Buscar por título", "Buscar por id",
+						"Buscar por autor", "Buscar por sucursal", "Buscar por género", "Volver"};
+				
+				int ele3 = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Gerente - " + apellido, 0, 0, null, opciones3, opciones3[0]);
+				
+				switch (ele3) {
+				case 0:
+					String[] libros = new String[libroControlador.getAllLibros().size()];
+					for (int i = 0; i < libros.length; i++) {
+						libros[i] = libroControlador.getAllLibros().get(i).toString();
+					}
+					JOptionPane.showMessageDialog(null, libros);
+					break;
+
+				case 1:
+					
+					break;
+					
+				case 2:
+					
+					break;
+				
+				case 3:
+					int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el id del libro que busca"));
+					JOptionPane.showMessageDialog(null, libroControlador.getLibroById(id) + "\n Se encuentra en la sucursal: \n" + bibliotecaControlador.getLibraryById(libroControlador.getLibroById(id).getIdSucursal_fk()));
+					break;
+					
+				case 4:
+					
+					break;
+				case 5:
+					
+					break;
+				
+				case 6:
+					
+					break;
+					
+				case 7:
+					
+					break;
+				}
 				
 				break;
 
