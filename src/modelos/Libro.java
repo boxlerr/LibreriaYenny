@@ -6,31 +6,32 @@ public class Libro {
 	private String autor;
 	private String genero;
 	private int stock;
+	private String precio;
 	private int idSucursal_fk;
-	public Libro(int idLibro, String titulo, String autor, String genero, int stock, int idSucursal_fk) {
+	public Libro(int idLibro, String titulo, String autor, String genero, int stock, String precio, int idSucursal_fk) {
 		super();
 		this.idLibro = idLibro;
 		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
 		this.stock = stock;
+		this.precio = precio;
 		this.idSucursal_fk = idSucursal_fk;
 	}
-	public Libro(String titulo, String autor, String genero, int stock, int idSucursal_fk) {
+	public Libro(String titulo, String autor, String genero, int stock, String precio, int idSucursal_fk) {
 		super();
 		this.titulo = titulo;
 		this.autor = autor;
 		this.genero = genero;
 		this.stock = stock;
+		this.precio = precio;
 		this.idSucursal_fk = idSucursal_fk;
 	}
-	
 	@Override
 	public String toString() {
 		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", genero=" + genero
-				+ ", stock=" + stock + ", idSucursal_fk=" + idSucursal_fk + "]\n";
+				+ ", stock=" + stock + ", precio=" + precio + ", idSucursal_fk=" + idSucursal_fk + "]";
 	}
-
 	public int getIdLibro() {
 		return idLibro;
 	}
@@ -61,12 +62,20 @@ public class Libro {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
+	public String getPrecio() {
+		return precio;
+	}
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
 	public int getIdSucursal_fk() {
 		return idSucursal_fk;
 	}
 	public void setIdSucursal_fk(int idSucursal_fk) {
 		this.idSucursal_fk = idSucursal_fk;
 	}
+	
+	
 	
 	
 	

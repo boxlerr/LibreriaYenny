@@ -28,7 +28,7 @@ public class LibroControlador implements LibroRepository {
        
             while (resultSet.next()) {
             	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
                 libros.add(libro);
             }
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class LibroControlador implements LibroRepository {
        
             while (resultSet.next()) {
             	libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class LibroControlador implements LibroRepository {
        
             while (resultSet.next()) {
             	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
             	libros.add(libro);
             }
         } catch (SQLException e) {
@@ -85,7 +85,7 @@ public class LibroControlador implements LibroRepository {
        
             while (resultSet.next()) {
             	libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +106,7 @@ public class LibroControlador implements LibroRepository {
             		libros = new ArrayList<>();
 				}
             	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
             	libros.add(libro);
             }
         } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class LibroControlador implements LibroRepository {
             		libros = new ArrayList<>();
 				}
             	Libro libro = new Libro(resultSet.getInt("idLibro"), resultSet.getString("titulo"), resultSet.getString("autor"), 
-            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getInt("idSucursal_fk"));
+            			resultSet.getString("genero"), resultSet.getInt("stock"), resultSet.getString("precio"), resultSet.getInt("idSucursal_fk"));
             	libros.add(libro);
             }
         } catch (SQLException e) {
