@@ -8,6 +8,7 @@ public class Libro {
 	private int stock;
 	private String precio;
 	private int idSucursal_fk;
+	private boolean eliminado;
 	public Libro(int idLibro, String titulo, String autor, String genero, int stock, String precio, int idSucursal_fk) {
 		super();
 		this.idLibro = idLibro;
@@ -74,10 +75,11 @@ public class Libro {
 	public void setIdSucursal_fk(int idSucursal_fk) {
 		this.idSucursal_fk = idSucursal_fk;
 	}
-	
-	
-	
-	
-	
+	public boolean isEliminado() {
+		return eliminado;
+	}
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
 	
 }	

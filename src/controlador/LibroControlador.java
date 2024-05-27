@@ -138,6 +138,65 @@ public class LibroControlador implements LibroRepository {
         return libros;
 		
 	}
+    
+    @Override
+    public void addLibro(Libro libro) {
+    	try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO libro (titulo, autor, genero, stock, precio, idSucursal_fk) VALUES (?, ?, ?, ?, ?, ?)");
+            statement.setString(1, libro.getTitulo());
+            statement.setString(2, libro.getAutor());
+            statement.setString(3, libro.getGenero());
+            statement.setInt(4, libro.getStock());
+            statement.setString(5, libro.getPrecio());
+            statement.setInt(6, libro.getIdSucursal_fk());
+            
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+            	JOptionPane.showMessageDialog(null, "Libro añadido exitosamente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void updateLibro(Libro libro) {
+    	try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE libro SET titulo = ?, autor= ?, genero = ?, stock = ?, precio = ?, idSucursal_fk = ? WHERE idLibro = ?");
+            statement.setString(1, libro.getTitulo());
+            statement.setString(2, libro.getAutor());
+            statement.setString(3, libro.getGenero());
+            statement.setInt(4, libro.getStock());
+            statement.setString(5, libro.getPrecio());
+            statement.setInt(6, libro.getIdSucursal_fk());
+            statement.setInt(7, libro.getIdLibro());
+            
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+            	JOptionPane.showMessageDialog(null, "Libro actualizado exitosamente");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public void deleteLibro(int id) {
+    	try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM libro WHERE idLibro = ?");
+            statement.setInt(1, id);
+            
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+            	JOptionPane.showMessageDialog(null, "Libro eliminado exitosamente");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+    
 
 //    @Override
 //    public Usuario getUserById(String mail, String contraseña) {
@@ -208,25 +267,4 @@ public class LibroControlador implements LibroRepository {
 //            e.printStackTrace();
 //        }
 //    }
-
-	@Override
-	public void addLibro() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateLibro() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteLibro() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-  
 }
