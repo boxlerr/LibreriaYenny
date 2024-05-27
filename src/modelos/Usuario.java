@@ -2,6 +2,7 @@ package modelos;
 
 import controlador.BibliotecaControlador;
 import controlador.LibroControlador;
+import controlador.UsuarioControlador;
 
 public class Usuario {
 	private int id;
@@ -63,7 +64,7 @@ public class Usuario {
 	
 	
 	
-	public void Ingreso(LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
+	public void Ingreso(LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador, UsuarioControlador usuarioControlador) {
 		
 	}
 

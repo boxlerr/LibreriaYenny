@@ -65,8 +65,7 @@ public class UsuarioControlador implements UserRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	JOptionPane.showMessageDialog(null, "Su usuario se creó correctamente");
-                System.out.println("Usuario insertado exitosamente");
+            	JOptionPane.showMessageDialog(null, "Su usuario creado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();

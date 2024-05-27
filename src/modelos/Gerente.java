@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import controlador.BibliotecaControlador;
 import controlador.LibroControlador;
+import controlador.UsuarioControlador;
 
 public class Gerente extends Usuario {
 	private int idGerente;
@@ -107,7 +108,7 @@ public class Gerente extends Usuario {
 	}
 	
 	@Override
-	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
+	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador, UsuarioControlador usuarioControlador) {
 		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Cerrar sesión"};
 		int ele=0;
 		
@@ -148,7 +149,6 @@ public class Gerente extends Usuario {
                     break;
 				
 				case 2:
-					//diego@gmail.com
 					Libro libroAEditar = librosEditables(libroControlador.getAllLibros());
 					
 				    if (libroAEditar != null) {
@@ -209,9 +209,20 @@ public class Gerente extends Usuario {
 				
 				switch (ele2) {
 				case 0:
-					
+					String mail = JOptionPane.showInputDialog("Ingrese el mail del usuario:");
+                    String contraseña = JOptionPane.showInputDialog("Ingrese la contraseña del usuario:");
+                    String[] tiposUsuario = {"Gerente", "Empleado", "Escritor"};
+                    String tipo = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario:", "Tipo de Usuario", 
+                    		JOptionPane.QUESTION_MESSAGE, null, tiposUsuario, tiposUsuario[0]);
+                    
+                    Usuario nuevoUsuario = new Usuario(0, mail, contraseña, tipo);
+                    
+                    usuarioControlador.addUser(nuevoUsuario);
+				
 					break;
 
+					//diego@gmail.com
+					
 				case 1:
 					
 					break;

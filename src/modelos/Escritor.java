@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 
 import controlador.BibliotecaControlador;
 import controlador.LibroControlador;
+import controlador.UsuarioControlador;
 
 public class Escritor extends Usuario {
 	private int idEscritor;
@@ -54,7 +55,7 @@ public class Escritor extends Usuario {
 	}
 	
 	@Override
-	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
+	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador, UsuarioControlador usuarioControlador) {
 		String[] opciones = {"Enviar propuesta de libro","Ver estado de propuesta","Ver estado de produccion del libro", "Cerrar sesión"};
 		int ele=0;
 		do {

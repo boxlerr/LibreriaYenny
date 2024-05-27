@@ -138,8 +138,7 @@
 	            
 	            int rowsInserted = statement.executeUpdate();
 	            if (rowsInserted > 0) {
-	            	JOptionPane.showMessageDialog(null, "Su libro se añadió correctamente");
-	                System.out.println("Libro añadido exitosamente");
+	            	JOptionPane.showMessageDialog(null, "Libro añadido exitosamente");
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -159,6 +158,9 @@
 	            statement.setInt(7, libro.getIdLibro());
 	            
 	            int rowsUpdated = statement.executeUpdate();
+	            if (rowsUpdated > 0) {
+	            	JOptionPane.showMessageDialog(null, "Libro actualizado exitosamente");
+	            }
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
@@ -172,6 +174,9 @@
 	            statement.setInt(1, idLibro);
 	            
 	            int rowsDeleted = statement.executeUpdate();
+	            if (rowsDeleted > 0) {
+	            	JOptionPane.showMessageDialog(null, "Libro eliminado exitosamente");
+	            }
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
