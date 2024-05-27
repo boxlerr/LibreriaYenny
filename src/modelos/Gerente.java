@@ -78,7 +78,7 @@ public class Gerente extends Usuario {
 	
 	@Override
 	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
-		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Cerrar sesión"};
+		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Aplicar descuento", "Cerrar sesión"};
 		int ele=0;
 		
 		do {
@@ -87,7 +87,7 @@ public class Gerente extends Usuario {
 			switch (ele) {
 			
 			case 0:
-				String[] opciones1 = {"Agregar libro","Eliminar libro", "Volver"};
+				String[] opciones1 = {"Agregar libro","Eliminar libro", "Editar libro", "Volver"};
 				int ele1=0;
 				
 				ele1 = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Gerente - " + apellido, 0, 0, null, opciones1, opciones1[0]);
@@ -102,6 +102,10 @@ public class Gerente extends Usuario {
 					break;
 				
 				case 2:
+					
+					break;
+					
+				case 3:
 					
 					break;
 				}
@@ -207,6 +211,9 @@ public class Gerente extends Usuario {
 				break;
 
 			case 3:
+				//Aplicar descuento
+				break;
+			case 4:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
 				break;
 	
