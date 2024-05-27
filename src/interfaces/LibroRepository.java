@@ -18,9 +18,9 @@ public interface LibroRepository {
     
     List<Libro> getLibrosByGenero(String genero); 
     
-    void addLibro(); //añade libros a la bdd
+    void addLibro(Libro libro); //añade libros a la bdd
     
-    void updateLibro(); //actualiza los libros de la bdd
+    void updateLibro(Libro libro); //actualiza los libros de la bdd
     
-    void deleteLibro(); //eliminar libros de la bdd
+    void deleteLibro(int id); //eliminar libros de la bdd
 }
