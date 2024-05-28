@@ -200,7 +200,6 @@ public class Gerente extends Usuario {
                     usuarioControlador.addUser(nuevoUsuario);
                     
                     if (tipo=="Gerente") {
-						int id=usuarioControlador.getUserById(mail, contraseña).getId();
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
@@ -212,7 +211,6 @@ public class Gerente extends Usuario {
 	                    
 	                    
 					} else if (tipo=="Empleado") {
-						int id=usuarioControlador.getUserById(mail, contraseña).getId();
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
@@ -222,7 +220,6 @@ public class Gerente extends Usuario {
 	                    empleadoControlador.addEmpleado(newEmpleado, usuarioControlador.getUserById(mail, contraseña));
 						
 					} else if (tipo=="Escritor") {
-						int id=usuarioControlador.getUserById(mail, contraseña).getId();
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
