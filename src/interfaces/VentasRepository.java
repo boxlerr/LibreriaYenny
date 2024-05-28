@@ -11,5 +11,6 @@ public interface VentasRepository {
 	boolean registrarVenta(Ventas venta);
 	List<Ventas> obtenerVentasEmpleado(int idEmpleado);
 	List<Ventas> obtenerVentasSucursal(int idSucursal);
+	List<Ventas> obtenerListaVentas();
 
 }

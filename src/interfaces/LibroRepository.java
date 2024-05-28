@@ -23,4 +23,9 @@ public interface LibroRepository {
     void updateLibro(Libro libro); //actualiza los libros de la bdd
     
     void deleteLibro(int id); //eliminar libros de la bdd
+    
+    double obtenerPrecioLibro(int id);
+
+	int obtenerCantidadDisponible(int id);
+
 }
