@@ -122,7 +122,20 @@ import javax.swing.JOptionPane;
 	                }
 					break;
 				case 1://prestar libro
-					
+					try {
+                        int idLibro = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del libro:"));
+                        int idUsuario = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del usuario:"));
+                        int idSucursal = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la sucursal:"));
+
+                        PrestamoControlador prestamoControlador = new PrestamoControlador();
+                        prestamoControlador.realizarPrestamo(idLibro, idUsuario, idSucursal);
+                        
+                        JOptionPane.showMessageDialog(null, "Préstamo realizado con éxito.");
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido.");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Ocurrió un error al realizar el préstamo.");
+                    }
 					break;
 				case 2:	//ver inventario
 					String[] libros = new String[libroControlador.getAllLibros().size()];
@@ -132,6 +145,18 @@ import javax.swing.JOptionPane;
 					JOptionPane.showMessageDialog(null, libros);				
 					break;
 				case 3: // registrar devolucion de libro
+					try {
+                        int idPrestamo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del préstamo a devolver:"));
+
+                        PrestamoControlador prestamoControlador = new PrestamoControlador();
+                        prestamoControlador.devolverLibro(idPrestamo);
+                        
+                        JOptionPane.showMessageDialog(null, "Libro devuelto con éxito.");
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "Por favor, ingrese un número válido.");
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, "Ocurrió un error al devolver el libro.");
+                    }
 					break;
 				case 4: //ver lista de prestamos
 					break;
