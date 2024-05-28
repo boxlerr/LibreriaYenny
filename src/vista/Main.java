@@ -45,15 +45,15 @@ class Main {
 					case "gerente":
 						
 						JOptionPane.showMessageDialog(null, "Ingresa como gerente: " + gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)));
-						gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
+						gerenteControlador.getGerenteById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
 					case "empleado":
 						JOptionPane.showMessageDialog(null, "Ingresa como empleado: " + empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)));
-						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
+						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
 					case "escritor":
 						JOptionPane.showMessageDialog(null, "Ingresa como escritor: " + escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)));
-						escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador);
+						escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
 
 
