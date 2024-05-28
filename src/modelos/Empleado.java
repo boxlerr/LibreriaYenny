@@ -106,8 +106,7 @@ public class Empleado extends Usuario {
 				for (int i = 0; i < libros.length; i++) {
 					libros[i] = libroControlador.getAllLibros().get(i).toString();
 				}
-				JOptionPane.showMessageDialog(null, libros);
-				
+				JOptionPane.showMessageDialog(null, libros);				
 				break;
 			case 3:
 				// registrar devolucion de libro
