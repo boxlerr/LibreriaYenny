@@ -79,6 +79,30 @@ public class VentasControlador implements VentasRepository {
         }
         return ventasEmpleado;
 	}
+	
+	@Override
+	public List<Ventas> obtenerListaVentas() {
+	    List<Ventas> listaVentas = new ArrayList<>();
+	    try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ventas")) {
+	        ResultSet rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            Ventas venta = new Ventas(
+	                rs.getInt("idVenta"),
+	                rs.getInt("idLibro"),
+	                rs.getInt("idEmpleado"),
+	                rs.getInt("cantidad"),
+	                rs.getDouble("valorUnitario"),
+	                rs.getDouble("valorTotal"),
+	                rs.getDate("fechaVenta").toLocalDate()
+	            );
+	            listaVentas.add(venta);
+	        }
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+	    return listaVentas;
+	}
+
 
 	@Override
 	public List<Ventas> obtenerVentasSucursal(int idSucursal) {

@@ -2,6 +2,7 @@ package modelos;
 
 import java.time.LocalDate;
 
+
 public class Ventas {
 	
 	private int idVenta;
@@ -11,6 +12,7 @@ public class Ventas {
     private double valorUnitario;
     private double valorTotal;
     private LocalDate fechaVenta;
+
     
     public Ventas(int idVenta, int idLibro, int idEmpleado, int cantidad, double valorUnitario, double valorTotal, LocalDate fechaVenta) {
         super();
@@ -65,6 +67,7 @@ public class Ventas {
 	public void setFechaVenta(LocalDate fechaVenta) {
 		this.fechaVenta = fechaVenta;
 	}
+	
 	
 	@Override
 	public String toString() {
