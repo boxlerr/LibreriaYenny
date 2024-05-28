@@ -36,6 +36,7 @@ public class EscritorControlador implements EscritorRepository {
         }
         return escritor;
 	}
+	
 	@Override
     public void addEscritor(Usuario usuario, Escritor escritor) {
         try {
@@ -47,7 +48,8 @@ public class EscritorControlador implements EscritorRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-                System.out.println("Usuario insertado exitosamente");
+
+                System.out.println("Escritor insertado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();

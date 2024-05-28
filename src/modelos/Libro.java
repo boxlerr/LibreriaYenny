@@ -1,5 +1,10 @@
 package modelos;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
 public class Libro {
 	private int idLibro;
 	private String titulo;
@@ -82,4 +87,31 @@ public class Libro {
 		this.eliminado = eliminado;
 	}
 	
+	public static Libro librosEliminados(List<Libro> list) {
+	    LinkedList<Libro> librosEliminados = new LinkedList<>();
+	    for (Libro libro : list) {
+	        if (!libro.isEliminado()) {
+	        	librosEliminados.add(libro);
+	        }
+	    }
+	    if (librosEliminados.isEmpty()) {
+	        return null;
+	    }
+	    Libro[] librosArray = librosEliminados.toArray(new Libro[0]);
+	    return (Libro) JOptionPane.showInputDialog(null, "Seleccione un libro para eliminar:", "Libros Disponibles", JOptionPane.QUESTION_MESSAGE, null, librosArray, librosArray[0]);
+	}
+	
+	public static Libro librosEditables(List<Libro> list) {
+	    LinkedList<Libro> librosEditables = new LinkedList<>();
+	    for (Libro libro : list) {
+	        if (!libro.isEliminado()) {
+	        	librosEditables.add(libro);
+	        }
+	    }
+	    if (librosEditables.isEmpty()) {
+	        return null;
+	    }
+	    Libro[] librosArray = librosEditables.toArray(new Libro[0]);
+	    return (Libro) JOptionPane.showInputDialog(null, "Seleccione un libro para editar:", "Libros Disponibles", JOptionPane.QUESTION_MESSAGE, null, librosArray, librosArray[0]);
+	}
 }	

@@ -35,4 +35,23 @@ public class EmpleadoControlador implements EmpleadoRepository {
         return empleado;
 	}
 
+	public void addEmpleado(Empleado empleado, Usuario usuario) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO empleado (idUser_fk, nombre, apellido, dni, idSucursal_fk) VALUES (?, ?, ?, ?, ?)");
+            statement.setInt(1, usuario.getId());
+            statement.setString(2, empleado.getNombre());
+            statement.setString(3, empleado.getApellido());
+            statement.setInt(4, empleado.getDni());
+            statement.setInt(5, empleado.getIdSucursal_fk());
+            
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+            	
+                System.out.println("Empleado insertado exitosamente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }
+	
 }

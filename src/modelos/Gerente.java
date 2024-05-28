@@ -5,7 +5,11 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import controlador.BibliotecaControlador;
+import controlador.EmpleadoControlador;
+import controlador.EscritorControlador;
+import controlador.GerenteControlador;
 import controlador.LibroControlador;
+import controlador.UsuarioControlador;
 
 public class Gerente extends Usuario {
 	private int idGerente;
@@ -77,36 +81,8 @@ public class Gerente extends Usuario {
 		this.idSucursal_fk = idSucursal_fk;
 	}
 
-	private Libro librosEliminados(List<Libro> list) {
-	    LinkedList<Libro> librosEliminados = new LinkedList<>();
-	    for (Libro libro : list) {
-	        if (!libro.isEliminado()) {
-	        	librosEliminados.add(libro);
-	        }
-	    }
-	    if (librosEliminados.isEmpty()) {
-	        return null;
-	    }
-	    Libro[] librosArray = librosEliminados.toArray(new Libro[0]);
-	    return (Libro) JOptionPane.showInputDialog(null, "Seleccione un libro para eliminar:", "Libros Disponibles", JOptionPane.QUESTION_MESSAGE, null, librosArray, librosArray[0]);
-	}
-	
-	private Libro librosEditables(List<Libro> list) {
-	    LinkedList<Libro> librosEditables = new LinkedList<>();
-	    for (Libro libro : list) {
-	        if (!libro.isEliminado()) {
-	        	librosEditables.add(libro);
-	        }
-	    }
-	    if (librosEditables.isEmpty()) {
-	        return null;
-	    }
-	    Libro[] librosArray = librosEditables.toArray(new Libro[0]);
-	    return (Libro) JOptionPane.showInputDialog(null, "Seleccione un libro para editar:", "Libros Disponibles", JOptionPane.QUESTION_MESSAGE, null, librosArray, librosArray[0]);
-	}
-	
 	@Override
-	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador) {
+	public void Ingreso (LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador, UsuarioControlador usuarioControlador, GerenteControlador gerenteControlador, EmpleadoControlador empleadoControlador, EscritorControlador escritorControlador) {
 		String[] opciones = {"Administrar libros","Administrar cuentas", "Ver inventario", "Aplicar descuento", "Cerrar sesión"};
 		int ele=0;
 		
@@ -145,7 +121,7 @@ public class Gerente extends Usuario {
 					break;
 
 				case 1:
-					Libro libroAEliminar = librosEliminados(libroControlador.getAllLibros());
+					Libro libroAEliminar = Libro.librosEliminados(libroControlador.getAllLibros());
                     if (libroAEliminar != null) {
                         libroControlador.deleteLibro(libroAEliminar.getIdLibro());
                     } else {
@@ -154,7 +130,7 @@ public class Gerente extends Usuario {
 					break;
 				
 				case 2:
-					Libro libroAEditar = librosEditables(libroControlador.getAllLibros());
+					Libro libroAEditar = Libro.librosEditables(libroControlador.getAllLibros());
 					
 				    if (libroAEditar != null) {
 				        
@@ -214,11 +190,61 @@ public class Gerente extends Usuario {
 				
 				switch (ele2) {
 				case 0:
-					
+					String mail = JOptionPane.showInputDialog("Ingrese el mail del usuario:");
+                    String contraseña = JOptionPane.showInputDialog("Ingrese la contraseña del usuario:");
+                    String[] tiposUsuario = {"Gerente", "Empleado", "Escritor"};
+                    String tipo = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario:", "Tipo de Usuario", 
+                    		JOptionPane.QUESTION_MESSAGE, null, tiposUsuario, tiposUsuario[0]);
+                    
+                    Usuario nuevoUsuario = new Usuario(mail, contraseña, tipo);
+                    usuarioControlador.addUser(nuevoUsuario);
+                    
+                    if (tipo=="Gerente") {
+						int id=usuarioControlador.getUserById(mail, contraseña).getId();
+						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
+	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
+	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    int idSucursal_fk = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la sucursal donde trabajara:"));
+	                    
+	                    
+	                    Gerente newGerente = new Gerente(mail, contraseña, tipo, nombre, apellido, dni, idSucursal_fk);
+	                    gerenteControlador.addGerente(newGerente, usuarioControlador.getUserById(mail, contraseña));
+	                    
+	                    
+					} else if (tipo=="Empleado") {
+						int id=usuarioControlador.getUserById(mail, contraseña).getId();
+						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
+	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
+	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    int idSucursal_fk = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la sucursal donde trabajara:"));
+	                    
+	                    Empleado newEmpleado = new Empleado(mail, contraseña, tipo, nombre, apellido, dni, idSucursal_fk);
+	                    empleadoControlador.addEmpleado(newEmpleado, usuarioControlador.getUserById(mail, contraseña));
+						
+					} else if (tipo=="Escritor") {
+						int id=usuarioControlador.getUserById(mail, contraseña).getId();
+						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
+	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
+	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    
+	                    Escritor newEscritor = new Escritor(mail, contraseña, tipo, nombre, apellido, dni);
+	                    escritorControlador.addEscritor(usuarioControlador.getUserById(mail, contraseña), newEscritor);
+					} 
+              
 					break;
 
 				case 1:
-					
+					String[] tipoUsuario = {"Gerente", "Empleado", "Escritor"};
+                    String tipos = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario a eliminar:", "Tipo de Usuario", 
+                    		JOptionPane.QUESTION_MESSAGE, null, tipoUsuario, tipoUsuario[0]);
+                    
+                    if (tipos=="Gerente") {
+                    	
+					} else if (tipos=="Empleado") {
+						
+					} else if (tipos=="Escritor") {
+
+					} 
 					break;
 					
 				case 2:
