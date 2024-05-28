@@ -24,12 +24,12 @@ public class VentasControlador implements VentasRepository {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 int stock = rs.getInt("stock");
-                return stock > 0; // Retorna true si hay stock disponible
+                return stock > 0;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return false; // Si ocurre algún error o no se encuentra el libro, retorna false
+        return false; 
 	}
 
 	@Override
@@ -38,12 +38,12 @@ public class VentasControlador implements VentasRepository {
             stmt.setInt(1, idLibro);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return rs.getInt("stock"); // Retorna la cantidad de libros disponibles en stock
+                return rs.getInt("stock"); 
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return 0; // Si ocurre algún error o no se encuentra el libro, retorna 0
+        return 0;
 	}
 
 	@Override
@@ -53,7 +53,6 @@ public class VentasControlador implements VentasRepository {
             stmt.setDate(6, java.sql.Date.valueOf(venta.getFechaVenta()));
             int rowsAffected = stmt.executeUpdate();
             if (rowsAffected > 0) {
-                // Actualizar el stock del libro después de la venta
                 int nuevoStock = obtenerCantidadDisponible(venta.getIdLibro()) - venta.getCantidad();
                 actualizarStockLibro(venta.getIdLibro(), nuevoStock);
                 return true;

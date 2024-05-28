@@ -93,29 +93,37 @@ public class Empleado extends Usuario {
 			
 			switch (ele) {
 			case 0:
+				//vender libro
 				
 				break;
 			case 1:
+				//prestar libro
 				
 				break;
 			case 2:
+				//ver inventario
+				String[] libros = new String[libroControlador.getAllLibros().size()];
+				for (int i = 0; i < libros.length; i++) {
+					libros[i] = libroControlador.getAllLibros().get(i).toString();
+				}
+				JOptionPane.showMessageDialog(null, libros);
 				
 				break;
 			case 3:
-				
+				// registrar devolucion de libro
 				break;
 			case 4:
-				
+				//ver lista de prestamos
 				break;
 			case 5:
-				
+				//ver lista de ventas
 				break;
 			case 6:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
 				break;
 	
 			}
-		} while (ele!=5);
+		} while (ele!=6);
 	}
 	
 }
