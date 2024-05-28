@@ -197,6 +197,40 @@ public class LibroControlador implements LibroRepository {
         }
 	}
     
+    @Override
+    public double obtenerPrecioLibro(int id) {
+        double precio = 0.0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT precio FROM libro WHERE idLibro = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                precio = resultSet.getDouble("precio");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return precio;
+    }
+    
+    @Override
+    public int obtenerCantidadDisponible(int id) {
+        int cantidadDisponible = 0;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT stock FROM libro WHERE idLibro = ?");
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                cantidadDisponible = resultSet.getInt("stock");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cantidadDisponible;
+    }
+    
 
 //    @Override
 //    public Usuario getUserById(String mail, String contraseña) {
