@@ -91,13 +91,31 @@ import javax.swing.JOptionPane;
 				ele = JOptionPane.showOptionDialog(null, "¿Que desea hacer?", "Empleado - ", 0, 0, null, opciones, opciones[0]);
 				
 				switch (ele) {
-				case 0: //vender libro
-	                List<Libro> librosDisponibles = libroControlador.getAllLibros();
+				case 0: //vender libro	
+					
+	                String[] sucursalesDisponiblesArray = {"1 - Once", "2 - Belgrano", "3 - Abasto"};	                
+	                String sucursalSeleccionada = (String) JOptionPane.showInputDialog(null, "Seleccione la sucursal:", "Venta de Libro", JOptionPane.QUESTION_MESSAGE, null, sucursalesDisponiblesArray, sucursalesDisponiblesArray[0]);
+	                if (sucursalSeleccionada == null) {
+	                    JOptionPane.showMessageDialog(null, "No se seleccionó ninguna sucursal.", "Venta cancelada", JOptionPane.INFORMATION_MESSAGE);
+	                    break;
+	                }
+	                int idSucursalSeleccionada = Integer.parseInt(sucursalSeleccionada.split(" - ")[0]);
+	                List<Libro> librosDisponibles = libroControlador.getLibrosBySucursal(idSucursalSeleccionada);
+	                if (librosDisponibles.isEmpty()) {
+	                    JOptionPane.showMessageDialog(null, "No hay libros disponibles en esta sucursal.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    break;
+	                }
+
 	                String[] librosDisponiblesArray = new String[librosDisponibles.size()];
 	                for (int i = 0; i < librosDisponibles.size(); i++) {
 	                    librosDisponiblesArray[i] = librosDisponibles.get(i).getTitulo();
 	                }
 	                String libroSeleccionado = (String) JOptionPane.showInputDialog(null, "Seleccione el libro que desea vender:", "Venta de Libro", JOptionPane.QUESTION_MESSAGE, null, librosDisponiblesArray, librosDisponiblesArray[0]);
+	                if (libroSeleccionado == null) {
+	                    JOptionPane.showMessageDialog(null, "No se seleccionó ningún libro.", "Venta cancelada", JOptionPane.INFORMATION_MESSAGE);
+	                    break;
+	                }
+
 	                int idLibroSeleccionado = librosDisponibles.get(Arrays.asList(librosDisponiblesArray).indexOf(libroSeleccionado)).getIdLibro();
 	                int cantidadDisponible = libroControlador.obtenerCantidadDisponible(idLibroSeleccionado);
 	                double valorUnitario = libroControlador.obtenerPrecioLibro(idLibroSeleccionado);
@@ -106,20 +124,19 @@ import javax.swing.JOptionPane;
 	                int cantidadVenta = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la cantidad a vender:", "Venta de Libro", JOptionPane.QUESTION_MESSAGE));
 
 	                if (cantidadVenta <= cantidadDisponible) {
-	                	
 	                    double valorTotal = valorUnitario * cantidadVenta;
 	                    LocalDate fechaVenta = LocalDate.now();
-	                    Ventas venta = new Ventas(0, idLibroSeleccionado, this.idEmpleado, cantidadVenta, valorUnitario, valorTotal, fechaVenta);
+	                    Ventas venta = new Ventas(0, idLibroSeleccionado, idEmpleado, cantidadVenta, valorUnitario, valorTotal, fechaVenta);
 	                    VentasControlador ventasControlador = new VentasControlador();
-	                    
 	                    if (ventasControlador.registrarVenta(venta)) {
-	                    	JOptionPane.showMessageDialog(null, "Venta realizada con éxito. Valor total: " + valorTotal, "Venta de Libro", JOptionPane.INFORMATION_MESSAGE);
+	                        JOptionPane.showMessageDialog(null, "Venta realizada con éxito. Valor total: " + valorTotal, "Venta de Libro", JOptionPane.INFORMATION_MESSAGE);
 	                    } else {
 	                        JOptionPane.showMessageDialog(null, "Error al realizar la venta.", "Venta de Libro", JOptionPane.ERROR_MESSAGE);
 	                    }
 	                } else {
 	                    JOptionPane.showMessageDialog(null, "No hay suficiente stock para realizar la venta.", "Venta de Libro", JOptionPane.ERROR_MESSAGE);
 	                }
+	                
 					break;
 				case 1://prestar libro
 					try {
