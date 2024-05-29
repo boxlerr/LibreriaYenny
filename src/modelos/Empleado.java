@@ -176,16 +176,24 @@ import javax.swing.JOptionPane;
                     }
 					break;
 				case 4: //ver lista de prestamos
+					PrestamoControlador PrestamoControlador = new PrestamoControlador();
+					List<Prestamos> listaPrestamos = PrestamoControlador.obtenerListaPrestamos();
+					StringBuilder mensajePrestamo = new StringBuilder();
+					 for (Prestamos prestamo : listaPrestamos) {
+					mensajePrestamo.append(prestamo.toString()).append("\n");
+					 }
+					JOptionPane.showMessageDialog(null, mensajePrestamo.toString(), "Lista de Ventas", JOptionPane.INFORMATION_MESSAGE);
+					
 					break;
 				case 5: //ver lista de ventas
 					 VentasControlador ventasControlador = new VentasControlador();
 					 List<Ventas> listaVentas = ventasControlador.obtenerListaVentas();
 
-					 StringBuilder mensaje = new StringBuilder();
+					 StringBuilder mensajeVenta = new StringBuilder();
 					 for (Ventas venta : listaVentas) {
-					 mensaje.append(venta.toString()).append("\n");
+					 mensajeVenta.append(venta.toString()).append("\n");
 					 }
-					JOptionPane.showMessageDialog(null, mensaje.toString(), "Lista de Ventas", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, mensajeVenta.toString(), "Lista de Ventas", JOptionPane.INFORMATION_MESSAGE);
 					break;
 				case 6:
 					JOptionPane.showMessageDialog(null, "Gracias por su servicio");
