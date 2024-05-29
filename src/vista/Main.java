@@ -55,8 +55,9 @@ class Main {
 						JOptionPane.showMessageDialog(null, "Ingresa como escritor: " + escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)));
 						escritorControlador.getEscritorById(usuarioControlador.getUserById(mail, contraseña)).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
-
-
+					case "cliente":
+						JOptionPane.showMessageDialog(null, "No se puede ingresar con cuentas cliente");
+						break;
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Ese usuario no se encuentra registrado, mail o contraseña incorrecta");
