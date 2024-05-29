@@ -8,4 +8,6 @@ public interface EscritorRepository {
 	Escritor getEscritorById (Usuario user);
 	
 	void addEscritor(Usuario usuario, Escritor escritor); 
+	
+	void deleteEscritor(int id);
 }

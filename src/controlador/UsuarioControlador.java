@@ -54,6 +54,24 @@ public class UsuarioControlador implements UserRepository {
         }
         return user;
     }
+    
+    @Override
+    public Usuario getUserById2(int id) {
+        Usuario user = null;
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
+            statement.setInt(1, id);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                user = new Usuario(resultSet.getInt("id"), resultSet.getString("mail"), resultSet.getString("contraseña"), resultSet.getString("tipo"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
 	@Override
     public void addUser(Usuario usuario) {

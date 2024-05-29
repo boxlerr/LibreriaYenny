@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import interfaces.EmpleadoRepository;
 import modelos.Empleado;
 import modelos.Usuario;
@@ -34,7 +36,8 @@ public class EmpleadoControlador implements EmpleadoRepository {
         }
         return empleado;
 	}
-
+	
+	@Override
 	public void addEmpleado(Empleado empleado, Usuario usuario) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO empleado (idUser_fk, nombre, apellido, dni, idSucursal_fk) VALUES (?, ?, ?, ?, ?)");
@@ -46,12 +49,28 @@ public class EmpleadoControlador implements EmpleadoRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	
+            	JOptionPane.showMessageDialog(null, "Usuario empleado creado exitosamente");
                 System.out.println("Empleado insertado exitosamente");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } 
     }
+	
+	@Override
+	public void deleteEmpleado(int id) {
+		try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM empleado WHERE idUser_fk = ?");
+            statement.setInt(1, id);
+            
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+            	JOptionPane.showMessageDialog(null, "Usuario eliminado exitosamente");
+                System.out.println("Usuario eliminado exitosamente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
 	
 }
