@@ -281,7 +281,41 @@ public class Gerente extends Usuario {
 					break;
 					
 				case 2:
+					Usuario usuarioAEditar = Usuario.usuariosEditables(usuarioControlador.getAllUsers());
 					
+				    if (usuarioAEditar != null) {
+				        
+				    	String[] opcionesEditar = {"Mail", "Contraseña", "Tipo de Usuario", "Cancelar"};
+				        int eleEditar = JOptionPane.showOptionDialog(null, "¿Qué atributo desea editar?", "Editar Usuario",
+				                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcionesEditar, opcionesEditar[0]);
+				    	
+				        switch (eleEditar) {
+			            case 0:
+			                String nuevoMail = JOptionPane.showInputDialog("Ingrese el nuevo mail:");
+			                usuarioAEditar.setMail(nuevoMail);
+			                break;
+			            case 1:
+			                String nuevoContraseña = JOptionPane.showInputDialog("Ingrese la nueva contraseña:");
+			                usuarioAEditar.setContraseña(nuevoContraseña);
+			                break;
+			            case 2:
+			            	String[] tiposUsuario1 = {"Gerente", "Empleado", "Escritor"};
+		                    String nuevoTipo = (String) JOptionPane.showInputDialog(null, "Seleccione el nuevo tipo de usuario:", "Tipo de Usuario", 
+		                    		JOptionPane.QUESTION_MESSAGE, null, tiposUsuario1, tiposUsuario1[0]);
+		                    
+		                    usuarioAEditar.setTipo(nuevoTipo);
+			                
+			                break;
+			            case 3:
+			                
+			            	break;
+			        }
+				     
+				    usuarioControlador.updateUser(usuarioAEditar);
+				        
+				    } else {
+				        JOptionPane.showMessageDialog(null, "No se editó ningún usuario");
+				    }
 					break;
 				
 				case 3:

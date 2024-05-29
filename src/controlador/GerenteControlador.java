@@ -69,7 +69,6 @@ public class GerenteControlador implements GerenteRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	JOptionPane.showMessageDialog(null, "Usuario gerente creado exitosamente");
                 System.out.println("Gerente insertado exitosamente");
             }
         } catch (SQLException e) {
@@ -84,14 +83,13 @@ public class GerenteControlador implements GerenteRepository {
 	}
 
 	@Override
-	public void deleteGerente(int id) {
+	public void deleteGerente(int idGerente) {
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM gerente WHERE idUser_fk = ?");
-            statement.setInt(1, id);
+            statement.setInt(1, idGerente);
             
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
-            	JOptionPane.showMessageDialog(null, "Usuario eliminado exitosamente");
                 System.out.println("Usuario eliminado exitosamente");
             }
         } catch (SQLException e) {
