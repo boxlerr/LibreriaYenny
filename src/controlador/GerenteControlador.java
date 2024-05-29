@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import interfaces.GerenteRepository;
 import modelos.Gerente;
 import modelos.Usuario;
@@ -67,7 +69,7 @@ public class GerenteControlador implements GerenteRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	
+            	JOptionPane.showMessageDialog(null, "Usuario gerente creado exitosamente");
                 System.out.println("Gerente insertado exitosamente");
             }
         } catch (SQLException e) {
@@ -76,20 +78,24 @@ public class GerenteControlador implements GerenteRepository {
     }
 
 	@Override
-	public Gerente addGerente(Gerente gerente) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Gerente updateGerente(Gerente gerente) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Gerente deleteGerente(Gerente gerente) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteGerente(int id) {
+		try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM gerente WHERE idUser_fk = ?");
+            statement.setInt(1, id);
+            
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+            	JOptionPane.showMessageDialog(null, "Usuario eliminado exitosamente");
+                System.out.println("Usuario eliminado exitosamente");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 }

@@ -197,15 +197,20 @@ public class Gerente extends Usuario {
                     		JOptionPane.QUESTION_MESSAGE, null, tiposUsuario, tiposUsuario[0]);
                     
                     Usuario nuevoUsuario = new Usuario(mail, contraseña, tipo);
-                    usuarioControlador.addUser(nuevoUsuario);
+                    
                     
                     if (tipo=="Gerente") {
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    if (dni > 99999999) {
+	                    	do {
+		                    	dni = Integer.parseInt(JOptionPane.showInputDialog("ERROR: Ingrese un dni válido"));
+							} while (dni > 99999999);
+						}
 	                    int idSucursal_fk = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la sucursal donde trabajara:"));
 	                    
-	                    
+	                    usuarioControlador.addUser(nuevoUsuario);
 	                    Gerente newGerente = new Gerente(mail, contraseña, tipo, nombre, apellido, dni, idSucursal_fk);
 	                    gerenteControlador.addGerente(newGerente, usuarioControlador.getUserById(mail, contraseña));
 	                    
@@ -214,8 +219,14 @@ public class Gerente extends Usuario {
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    if (dni > 99999999) {
+	                    	do {
+		                    	dni = Integer.parseInt(JOptionPane.showInputDialog("ERROR: Ingrese un dni válido"));
+							} while (dni > 99999999);
+						}
 	                    int idSucursal_fk = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID de la sucursal donde trabajara:"));
 	                    
+	                    usuarioControlador.addUser(nuevoUsuario);
 	                    Empleado newEmpleado = new Empleado(mail, contraseña, tipo, nombre, apellido, dni, idSucursal_fk);
 	                    empleadoControlador.addEmpleado(newEmpleado, usuarioControlador.getUserById(mail, contraseña));
 						
@@ -223,7 +234,13 @@ public class Gerente extends Usuario {
 						String nombre = JOptionPane.showInputDialog("Ingrese el nombre del usuario:");
 	                    String apellido = JOptionPane.showInputDialog("Ingrese el apellido del usuario:");
 	                    int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el DNI del usuario:"));
+	                    if (dni > 99999999) {
+	                    	do {
+		                    	dni = Integer.parseInt(JOptionPane.showInputDialog("ERROR: Ingrese un dni válido"));
+							} while (dni > 99999999);
+						}
 	                    
+	                    usuarioControlador.addUser(nuevoUsuario);
 	                    Escritor newEscritor = new Escritor(mail, contraseña, tipo, nombre, apellido, dni);
 	                    escritorControlador.addEscritor(usuarioControlador.getUserById(mail, contraseña), newEscritor);
 					} 
@@ -231,17 +248,36 @@ public class Gerente extends Usuario {
 					break;
 
 				case 1:
-					String[] tipoUsuario = {"Gerente", "Empleado", "Escritor"};
-                    String tipos = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario a eliminar:", "Tipo de Usuario", 
-                    		JOptionPane.QUESTION_MESSAGE, null, tipoUsuario, tipoUsuario[0]);
+                    int seguir=0;
+                    do {
+                    	int eliminar =Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese el id del usuario que desea eliminar"));
+                    	if (usuarioControlador.getUserById2(eliminar)==null) {
+    						JOptionPane.showMessageDialog(null, "No se encontró ningun usuario con ese id");
+    					} else {
+    						String[] sino = {"Si", "Cancelar"};
+    						int opcionselect = JOptionPane.showOptionDialog(null, "¿Está seguro que desea eliminar el siguiente usuario? \n" + 
+    	                    usuarioControlador.getUserById2(eliminar), "¿Eliminar?", 0, 0, null, sino, sino[0]);
+    	                    if (opcionselect==0) {
+    							if (usuarioControlador.getUserById2(eliminar).getTipo().equalsIgnoreCase("gerente")) {
+    								usuarioControlador.deleteUser(eliminar);
+    								gerenteControlador.deleteGerente(eliminar);
+								} else if (usuarioControlador.getUserById2(eliminar).getTipo().equalsIgnoreCase("empleado")) {
+									usuarioControlador.deleteUser(eliminar);
+									empleadoControlador.deleteEmpleado(eliminar);
+								} else if (usuarioControlador.getUserById2(eliminar).getTipo().equalsIgnoreCase("escritor")) {
+									usuarioControlador.deleteUser(eliminar);
+									escritorControlador.deleteEscritor(eliminar);
+								}
+    							
+    						} else {
+    							JOptionPane.showMessageDialog(null, "No se eliminó ningun usuario");
+    						}
+    	                    seguir=1;
+    					}
+					} while (seguir==0);
                     
-                    if (tipos=="Gerente") {
-                    	
-					} else if (tipos=="Empleado") {
-						
-					} else if (tipos=="Escritor") {
-
-					} 
+                    
+                    
 					break;
 					
 				case 2:

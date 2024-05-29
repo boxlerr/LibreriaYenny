@@ -10,12 +10,10 @@ public interface GerenteRepository {
 	List<Gerente> getAllGerentes();
 	
     Gerente getGerenteById(Usuario user); //llama solo a uno, por su id
-    
-    Gerente addGerente(Gerente gerente);
-    
+        
     Gerente updateGerente(Gerente gerente);
     
-    Gerente deleteGerente(Gerente gerente);
+    void deleteGerente(int id);
 
 	void addGerente(Gerente gerente, Usuario usuario);
 }
