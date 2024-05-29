@@ -94,11 +94,11 @@ public class UsuarioControlador implements UserRepository {
 	@Override
     public void updateUser(Usuario usuario) {
         try {
-            PreparedStatement statement = connection.prepareStatement("UPDATE users SET mail = ?, contraseña = ? WHERE id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET mail = ?, contraseña = ?, tipo = ? WHERE id = ?");
             statement.setString(1, usuario.getMail());
             statement.setString(2, usuario.getContraseña());
             statement.setString(3, usuario.getTipo());
-            statement.setInt(3, usuario.getId());
+            statement.setInt(4, usuario.getId());
             
             int rowsUpdated = statement.executeUpdate();
             if (rowsUpdated > 0) {

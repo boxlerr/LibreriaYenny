@@ -49,7 +49,6 @@ public class EmpleadoControlador implements EmpleadoRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	JOptionPane.showMessageDialog(null, "Usuario empleado creado exitosamente");
                 System.out.println("Empleado insertado exitosamente");
             }
         } catch (SQLException e) {
@@ -58,10 +57,10 @@ public class EmpleadoControlador implements EmpleadoRepository {
     }
 	
 	@Override
-	public void deleteEmpleado(int id) {
+	public void deleteEmpleado(int idEmpleado) {
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM empleado WHERE idUser_fk = ?");
-            statement.setInt(1, id);
+            statement.setInt(1, idEmpleado);
             
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {

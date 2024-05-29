@@ -48,7 +48,6 @@ public class EscritorControlador implements EscritorRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
-            	JOptionPane.showMessageDialog(null, "Usuario escritor creado exitosamente");
                 System.out.println("Escritor insertado exitosamente");
             }
         } catch (SQLException e) {
@@ -57,10 +56,10 @@ public class EscritorControlador implements EscritorRepository {
     }
 	
 	@Override
-	public void deleteEscritor(int id) {
+	public void deleteEscritor(int idEscritor) {
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM escritor WHERE idUser_fk = ?");
-            statement.setInt(1, id);
+            statement.setInt(1, idEscritor);
             
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
@@ -71,5 +70,4 @@ public class EscritorControlador implements EscritorRepository {
             e.printStackTrace();
         }
 	}
-
 }
