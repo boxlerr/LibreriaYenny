@@ -148,6 +148,23 @@ public class UsuarioControlador implements UserRepository {
 			return mail2;
 		
 		}
+    public boolean verificarMailTest(String mail2) {
+    	boolean retorno = true;
+				String mails = "";
+				for (int i = 0; i < this.getAllUsers().size(); i++) {
+					mails = mails + this.getAllUsers().get(i).getMail();
+				}
+				
+				if (mail2.contains("@") && mail2.contains(".")) {
+					if (mails.contains(mail2)) {
+						retorno = false;
+					}
+				} else {
+					retorno = false;
+				}
+			return retorno;
+		
+		}
     
     @Override
 	public String verificarContraseña(String contraseña2) {
@@ -167,6 +184,21 @@ public class UsuarioControlador implements UserRepository {
 				
 			} while (seguir==0);
 			return contraseña2;
+		
+		}
+    public boolean verificarContraseñaTest(String contraseña2) {
+    	boolean retorno = true;
+				
+				if (contraseña2.isBlank()) {
+					retorno = false;
+				} else if (contraseña2.length()<6) {
+					retorno = false;
+				} else if (!contraseña2.contains("1")&&!contraseña2.contains("2")&&!contraseña2.contains("3")&&!contraseña2.contains("4")&&!contraseña2.contains("5")&&!contraseña2.contains("6")&&!contraseña2.contains("7")&&!contraseña2.contains("8")&&!contraseña2.contains("9")) {
+					retorno = false;
+				} else {
+				}
+				
+			return retorno;
 		
 		}
 
