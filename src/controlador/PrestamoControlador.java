@@ -29,11 +29,9 @@ public class PrestamoControlador implements PrestamoRepository {
             ps.setString(3, nombreCliente);
             ps.setString(4, apellidoCliente);
             ps.executeUpdate();
-
             PreparedStatement psUpdate = connection.prepareStatement("UPDATE libro SET stock = stock - 1 WHERE idLibro = ?");
             psUpdate.setInt(1, idLibro);
             psUpdate.executeUpdate();
-
             connection.commit();
         } catch (SQLException ex) {
             try {
@@ -49,21 +47,17 @@ public class PrestamoControlador implements PrestamoRepository {
     public void devolverLibro(int idPrestamo) {
         try {
             connection.setAutoCommit(false); 
-
             PreparedStatement psSelect = connection.prepareStatement("SELECT idLibro FROM prestamos WHERE idPrestamo = ?");
             psSelect.setInt(1, idPrestamo);
             ResultSet rs = psSelect.executeQuery();
             if (rs.next()) {
                 int idLibro = rs.getInt("idLibro");
-
                 PreparedStatement ps = connection.prepareStatement("UPDATE prestamos SET fechaDevolucion = NOW() WHERE idPrestamo = ?");
                 ps.setInt(1, idPrestamo);
                 ps.executeUpdate();
-
                 PreparedStatement psUpdate = connection.prepareStatement("UPDATE libro SET stock = stock + 1 WHERE idLibro = ?");
                 psUpdate.setInt(1, idLibro);
                 psUpdate.executeUpdate();
-
                 connection.commit();
             }
         } catch (SQLException ex) {

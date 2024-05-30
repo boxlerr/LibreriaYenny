@@ -4,10 +4,8 @@ import modelos.Empleado;
 import modelos.Usuario;
 
 public interface EmpleadoRepository {
-	//prototipos de metodos     
-    Empleado getEmpleadoById(Usuario user); //llama solo a uno, por su id
-    
+	
+    Empleado getEmpleadoById(Usuario user);
     void addEmpleado(Empleado empleado, Usuario usuario);
-    
     void deleteEmpleado(int id);
 }

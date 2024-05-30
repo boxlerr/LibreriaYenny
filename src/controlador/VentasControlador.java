@@ -70,8 +70,7 @@ public class VentasControlador implements VentasRepository {
             stmt.setInt(1, idEmpleado);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Ventas venta = new Ventas(rs.getInt("idVenta"),rs.getInt("idLibro"),rs.getInt("idEmpleado"),rs.getInt("cantidad"),rs.getDouble("valorUnitario"),rs.getDouble("valorTotal"),rs.getDate("fechaVenta").toLocalDate()
-                );
+                Ventas venta = new Ventas(rs.getInt("idVenta"),rs.getInt("idLibro"),rs.getInt("idEmpleado"),rs.getInt("cantidad"),rs.getDouble("valorUnitario"),rs.getDouble("valorTotal"),rs.getDate("fechaVenta").toLocalDate());
                 ventasEmpleado.add(venta);
             }
         } catch (SQLException ex) {
@@ -86,15 +85,7 @@ public class VentasControlador implements VentasRepository {
 	    try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ventas")) {
 	        ResultSet rs = stmt.executeQuery();
 	        while (rs.next()) {
-	            Ventas venta = new Ventas(
-	                rs.getInt("idVenta"),
-	                rs.getInt("idLibro"),
-	                rs.getInt("idEmpleado"),
-	                rs.getInt("cantidad"),
-	                rs.getDouble("valorUnitario"),
-	                rs.getDouble("valorTotal"),
-	                rs.getDate("fechaVenta").toLocalDate()
-	            );
+	            Ventas venta = new Ventas(rs.getInt("idVenta"),rs.getInt("idLibro"),rs.getInt("idEmpleado"),rs.getInt("cantidad"),rs.getDouble("valorUnitario"),rs.getDouble("valorTotal"),rs.getDate("fechaVenta").toLocalDate());
 	            listaVentas.add(venta);
 	        }
 	    } catch (SQLException ex) {
@@ -111,8 +102,7 @@ public class VentasControlador implements VentasRepository {
             stmt.setInt(1, idSucursal);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Ventas venta = new Ventas(rs.getInt("idVenta"),rs.getInt("idLibro"),rs.getInt("idEmpleado"),rs.getInt("cantidad"),rs.getDouble("valorUnitario"),rs.getDouble("valorTotal"),rs.getDate("fechaVenta").toLocalDate()
-                );
+                Ventas venta = new Ventas(rs.getInt("idVenta"),rs.getInt("idLibro"),rs.getInt("idEmpleado"),rs.getInt("cantidad"),rs.getDouble("valorUnitario"),rs.getDouble("valorTotal"),rs.getDate("fechaVenta").toLocalDate());
                 ventasSucursal.add(venta);
             }
         } catch (SQLException ex) {

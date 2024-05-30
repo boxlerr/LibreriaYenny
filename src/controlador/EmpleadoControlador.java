@@ -23,8 +23,7 @@ public class EmpleadoControlador implements EmpleadoRepository {
 		Empleado empleado = null;
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM empleado WHERE idUser_fk = ?");
-            statement.setInt(1, user.getId());
-            
+            statement.setInt(1, user.getId());        
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {
@@ -46,7 +45,6 @@ public class EmpleadoControlador implements EmpleadoRepository {
             statement.setString(3, empleado.getApellido());
             statement.setInt(4, empleado.getDni());
             statement.setInt(5, empleado.getIdSucursal_fk());
-            
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Empleado insertado exitosamente");
@@ -61,7 +59,6 @@ public class EmpleadoControlador implements EmpleadoRepository {
 		try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM empleado WHERE idUser_fk = ?");
             statement.setInt(1, idEmpleado);
-            
             int rowsDeleted = statement.executeUpdate();
             if (rowsDeleted > 0) {
             	JOptionPane.showMessageDialog(null, "Usuario eliminado exitosamente");
