@@ -127,7 +127,8 @@ public class Prueba {
 	        }
 	    }
 	    
-	    Libro libroAEditar = Libro.librosEditables(libroControlador.getAllLibros());
+//	    Libro libroAEditar = Libro.librosEditables(libroControlador.getAllLibros());
+	    Libro libroAEditar = new Libro("Título", "Autor", "Género", 22, "Precio", 2);
 	    
 	    if (libroAEditar != null) {
 	        
@@ -142,7 +143,7 @@ public class Prueba {
                 	if (nuevoTitulo.isBlank()) {
                 		JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setTitulo(nuevoTitulo);								
+//                	libroAEditar.setTitulo(nuevoTitulo);								
 				} while (nuevoTitulo.isBlank());
                 break;
             case 1:
@@ -152,7 +153,7 @@ public class Prueba {
                 	if (nuevoAutor.isBlank()) {
 						JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setAutor(nuevoAutor);								
+//                	libroAEditar.setAutor(nuevoAutor);								
 				} while (nuevoAutor.isBlank());
                 break;
             case 2:
@@ -162,7 +163,7 @@ public class Prueba {
                 	if (nuevoGenero.isBlank()) {
 						JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setGenero(nuevoGenero);							
+//                	libroAEditar.setGenero(nuevoGenero);							
 				} while (nuevoGenero.isBlank());
                 break;
             case 3:
@@ -172,7 +173,7 @@ public class Prueba {
                 	if (nuevoStock<=0) {
 						JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setStock(nuevoStock);								
+//                	libroAEditar.setStock(nuevoStock);								
 				} while (nuevoStock<=0);
                 break;
             case 4:
@@ -182,7 +183,7 @@ public class Prueba {
                 	if (nuevoPrecio.isBlank()) {
 						JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setPrecio(nuevoPrecio);								
+//                	libroAEditar.setPrecio(nuevoPrecio);								
 				} while (nuevoPrecio.isBlank());
                 break;
             case 5:
@@ -192,7 +193,7 @@ public class Prueba {
                 	if (nuevoIdSucursal<=0) {
 						JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
 					}
-                	libroAEditar.setIdSucursal_fk(nuevoIdSucursal);								
+//                	libroAEditar.setIdSucursal_fk(nuevoIdSucursal);								
 				} while (nuevoIdSucursal<=0 && nuevoIdSucursal>=4);
                 break;
             case 6:
@@ -221,7 +222,8 @@ public class Prueba {
 	        }
 	    }
 	    
-	    Libro libroAEditar = Libro.librosEditables(libroControlador.getAllLibros());
+//	    Libro libroAEditar = Libro.librosEditables(libroControlador.getAllLibros());
+	    Libro libroAEditar = new Libro("Título", "Autor", "Género", 22, "Precio", 50);
 	    
 	    if (libroAEditar != null) {
 	        
