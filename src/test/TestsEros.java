@@ -1,12 +1,8 @@
 package test;
 import static org.junit.Assert.assertEquals;
-
 import java.util.LinkedList;
-
 import javax.swing.JOptionPane;
-
 import org.junit.Test;
-
 import modelos.*;
 import controlador.*;
 

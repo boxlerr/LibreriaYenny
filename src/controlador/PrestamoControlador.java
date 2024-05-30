@@ -9,25 +9,25 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import interfaces.PrestamoRepository;
-import modelos.*;
-
+import modelos.Prestamos;
 
 public class PrestamoControlador implements PrestamoRepository {
-	
-	private final Connection connection;
+    
+    private final Connection connection;
 
     public PrestamoControlador() {
         this.connection = DatabaseConnection.getInstance().getConnection();
     }
 
     @Override
-    public void realizarPrestamo(int idLibro, int idUsuario, int idSucursal) {
+    public void realizarPrestamo(int idLibro, int idSucursal, String nombreCliente, String apellidoCliente) {
         try {
             connection.setAutoCommit(false); 
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO prestamos (idLibro, idUsuario, idSucursal_fk, fechaPrestamo) VALUES (?, ?, ?, NOW())");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO prestamos (idLibro, idSucursal_fk, Nombre_cliente, Apellido_cliente, fechaPrestamo) VALUES (?, ?, ?, ?, NOW())");
             ps.setInt(1, idLibro);
-            ps.setInt(2, idUsuario);
-            ps.setInt(3, idSucursal);
+            ps.setInt(2, idSucursal);
+            ps.setString(3, nombreCliente);
+            ps.setString(4, apellidoCliente);
             ps.executeUpdate();
 
             PreparedStatement psUpdate = connection.prepareStatement("UPDATE libro SET stock = stock - 1 WHERE idLibro = ?");
@@ -44,24 +44,22 @@ public class PrestamoControlador implements PrestamoRepository {
             Logger.getLogger(PrestamoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     @Override
     public void devolverLibro(int idPrestamo) {
         try {
             connection.setAutoCommit(false); 
 
-            
             PreparedStatement psSelect = connection.prepareStatement("SELECT idLibro FROM prestamos WHERE idPrestamo = ?");
             psSelect.setInt(1, idPrestamo);
             ResultSet rs = psSelect.executeQuery();
             if (rs.next()) {
                 int idLibro = rs.getInt("idLibro");
 
-                
                 PreparedStatement ps = connection.prepareStatement("UPDATE prestamos SET fechaDevolucion = NOW() WHERE idPrestamo = ?");
                 ps.setInt(1, idPrestamo);
                 ps.executeUpdate();
 
-                
                 PreparedStatement psUpdate = connection.prepareStatement("UPDATE libro SET stock = stock + 1 WHERE idLibro = ?");
                 psUpdate.setInt(1, idLibro);
                 psUpdate.executeUpdate();
@@ -84,8 +82,7 @@ public class PrestamoControlador implements PrestamoRepository {
         try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM prestamos")) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Prestamos prestamo = new Prestamos(rs.getInt("idPrestamo"),rs.getInt("idLibro"),rs.getInt("idUsuario"),rs.getInt("idSucursal_fk"),rs.getDate("fechaPrestamo").toLocalDate(), rs.getDate("fechaDevolucion") != null ? rs.getDate("fechaDevolucion").toLocalDate() : null
-                );
+                Prestamos prestamo = new Prestamos(rs.getInt("idPrestamo"), rs.getInt("idLibro"), rs.getInt("idSucursal_fk"), rs.getDate("fechaPrestamo").toLocalDate(), rs.getDate("fechaDevolucion") != null ? rs.getDate("fechaDevolucion").toLocalDate() : null, rs.getString("Nombre_cliente"), rs.getString("Apellido_cliente"));
                 listaPrestamos.add(prestamo);
             }
         } catch (SQLException ex) {
@@ -93,5 +90,4 @@ public class PrestamoControlador implements PrestamoRepository {
         }
         return listaPrestamos;
     }
-  }
-
+}
