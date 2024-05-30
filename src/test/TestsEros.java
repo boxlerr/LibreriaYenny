@@ -96,7 +96,7 @@ public class TestsEros {
 		boolean flag = false;
 		
 		String mail = "pedro@gmail.com";
-		String contraseña = "asdfghjkl";
+		String contraseña = "asdfghjkg";
 		
 		if (usuarioControlador.verificarMailTest(mail) && usuarioControlador.verificarContraseñaTest(contraseña)) {
 			flag=true;
