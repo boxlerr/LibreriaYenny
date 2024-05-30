@@ -438,7 +438,7 @@ public class Gerente extends Usuario {
 				break;
 
 			case 3:
-				//Aplicar descuento
+				JOptionPane.showMessageDialog(null, "Función en desarrollo");
 				break;
 			case 4:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
