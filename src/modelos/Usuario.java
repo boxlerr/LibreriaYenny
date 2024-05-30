@@ -86,25 +86,5 @@ public class Usuario {
 		
 	}
 
-	public boolean IniciarSesion(String mail,String contraseña) {
-		if (mail.length()>=4 && contraseña.length()>=4) {
-				
-			if (this.getMail().equals(mail)){
-				if( this.getContraseña().equals(contraseña)) {
-					return true;
-				} else {
-					//Error nombre
-					return false;
-				}
-						
-			} else {
-				//Error apellido
-				return false;
-			}
-		} else {
-			return false;
-	
-		}
-	}
 	
 }

@@ -123,7 +123,52 @@ public class UsuarioControlador implements UserRepository {
             e.printStackTrace();
         }
     }
-
+    
+    @Override
+	public String verificarMail(String mail2) {
+    	int seguir = 0;
+			do {
+				mail2 = JOptionPane.showInputDialog("Ingrese mail");
+				String mails = "";
+				for (int i = 0; i < this.getAllUsers().size(); i++) {
+					mails = mails + this.getAllUsers().get(i).getMail();
+				}
+				
+				if (mail2.contains("@") && mail2.contains(".")) {
+					seguir = 1;
+					if (mails.contains(mail2)) {
+						JOptionPane.showMessageDialog(null, "Ya existe una cuenta con ese mail, inicie sesion o utilice otro mail");
+						seguir = 0;
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Ingrese un mail válido, debe contener un '@' y un '.'");
+				}
+				
+			} while (seguir==0);
+			return mail2;
+		
+		}
+    
+    @Override
+	public String verificarContraseña(String contraseña2) {
+    	int seguir = 0;
+			do {
+				contraseña2 = JOptionPane.showInputDialog("Ingrese contraseña (Esta debe contener mínimo 6 caracteres y al menos un número)");
+				
+				if (contraseña2.isBlank()) {
+					JOptionPane.showMessageDialog(null, "Debe ingresar una contraseña");
+				} else if (contraseña2.length()<6) {
+					JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 6 caracteres");
+				} else if (!contraseña2.contains("1")&&!contraseña2.contains("2")&&!contraseña2.contains("3")&&!contraseña2.contains("4")&&!contraseña2.contains("5")&&!contraseña2.contains("6")&&!contraseña2.contains("7")&&!contraseña2.contains("8")&&!contraseña2.contains("9")) {
+					JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un número");
+				} else {
+					seguir = 1;
+				}
+				
+			} while (seguir==0);
+			return contraseña2;
+		
+		}
 
   
 }

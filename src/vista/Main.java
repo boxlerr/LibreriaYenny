@@ -1,6 +1,8 @@
 package vista;
 import javax.swing.JOptionPane;
 
+import org.hamcrest.core.StringContains;
+
 import com.mysql.jdbc.Connection;
 
 import controlador.*;
@@ -67,8 +69,14 @@ class Main {
 				break;
 					
 			case 1:
-				String mail2 = JOptionPane.showInputDialog("Ingrese mail");
-				String contraseña2 = JOptionPane.showInputDialog("Ingrese contraseña");
+				
+				String mail2 = "";
+				mail2=usuarioControlador.verificarMail(mail2);
+				
+				String contraseña2 = "";
+				contraseña2=usuarioControlador.verificarContraseña(contraseña2);
+				
+				
 				String nombre = JOptionPane.showInputDialog("Ingrese nombre");
 				String apellido = JOptionPane.showInputDialog("Ingrese apellido");
 				int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese dni"));

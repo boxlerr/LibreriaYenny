@@ -48,6 +48,7 @@ public class EscritorControlador implements EscritorRepository {
             
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
+            	JOptionPane.showMessageDialog(null, "Usuario creado exitosamente");
                 System.out.println("Escritor insertado exitosamente");
             }
         } catch (SQLException e) {
