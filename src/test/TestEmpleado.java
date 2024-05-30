@@ -10,7 +10,7 @@ import controlador.VentasControlador;
 
 public class TestEmpleado {
 	@Test
-	public void verificarDisponibilidadLibroTest() throws SQLException {
+	public void VerifLibrodisponible() throws SQLException {
 	    VentasControlador controlador = new VentasControlador();
 
 	    boolean flag = false;
@@ -21,7 +21,7 @@ public class TestEmpleado {
 	}
 
 @Test
-public void verificarNoDisponibilidadLibroTest() throws SQLException {
+public void VerifLibroNodisponible() throws SQLException {
     VentasControlador controlador = new VentasControlador();
  
     boolean flag = false;

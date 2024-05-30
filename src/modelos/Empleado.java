@@ -202,7 +202,6 @@ import java.util.Set;
 					case 1:
 						String[] bibliotecas = {"Once", "Belgrano", "Abasto"};
 						String opcionselect = (String) JOptionPane.showInputDialog(null, "Seleccione sucursal", null, 0, null, bibliotecas, bibliotecas[0]);
-						
 						JOptionPane.showMessageDialog(null, "Sucursal: " + bibliotecaControlador.getLibraryByNombre(opcionselect) + "\nInventario: \n" +
 								libroControlador.getLibrosBySucursal(bibliotecaControlador.getLibraryByNombre(opcionselect).getIdSucursal()));
 						
