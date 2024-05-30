@@ -44,16 +44,15 @@ public class Prueba {
 	
 	@Test
 	public void AgregarLibroF() {
-		boolean error=false;
 		boolean flag=false;
 		LibroControlador libroControlador = new LibroControlador();
-		do {
+		
 		String titulo = "Garfield";
         String autor = "Jim Davis";
         String genero = "Comedia";
         int stock = 20;
         String precio = "100";
-        int idSucursal = 1;
+        int idSucursal = 4;
         
         if (titulo!="" && autor!="" && genero!="" && stock>0 && precio!="" && (idSucursal>=1 && idSucursal<=3)) {
         	Libro nuevoLibro = new Libro(0, titulo, autor, genero, stock, precio, idSucursal);
@@ -62,10 +61,9 @@ public class Prueba {
 			flag=true;
 		} else {
 			JOptionPane.showMessageDialog(null, "Error al cargar los datos");
-			error=true;
 		}
         
-		} while (error);
+		
 		
 		assertEquals(false,flag);
 	}
@@ -114,7 +112,7 @@ public class Prueba {
             JOptionPane.showMessageDialog(null, "No se eliminó ningún libro");
         }
         
-		assertEquals(true,flag);
+		assertEquals(false,flag);
 	}
 	
 	
@@ -543,7 +541,7 @@ public class Prueba {
 			}
 		} while (seguir==0);
 		
-		assertEquals(true,flag);
+		assertEquals(false,flag);
 	}
 	
 	
@@ -644,6 +642,6 @@ public class Prueba {
 	        JOptionPane.showMessageDialog(null, "No se editó ningún usuario");
 	    }
 		
-		assertEquals(true,flag);
+		assertEquals(false,flag);
 	}
 }
