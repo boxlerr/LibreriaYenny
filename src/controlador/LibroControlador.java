@@ -231,6 +231,20 @@ public class LibroControlador implements LibroRepository {
         return cantidadDisponible;
     }
     
+    public boolean verificarLibroTest(Libro libroAEliminar) {
+    	boolean retorno=true;
+		String libros="";
+		for (int i = 0; i < this.getAllLibros().size(); i++) {
+			if (this.getLibroById(i)==libroAEliminar) {
+				retorno=false;
+			}
+			libros = libros + this.getAllLibros().get(i);
+		}
+		
+		
+		
+		return retorno;
+	}
 
 //    @Override
 //    public Usuario getUserById(String mail, String contraseña) {
