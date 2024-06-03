@@ -12,7 +12,7 @@ public class Libro {
 	private String genero;
 	private int stock;
 	private String precio;
-	private int idSucursal_fk;
+	private int idSucursal_fk;	
 	private boolean eliminado;
 	public Libro(int idLibro, String titulo, String autor, String genero, int stock, String precio, int idSucursal_fk) {
 		super();

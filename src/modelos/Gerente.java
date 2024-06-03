@@ -139,65 +139,29 @@ public class Gerente extends Usuario {
 				                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcionesEditar, opcionesEditar[0]);
 				    	
 				        switch (eleEditar) {
-				        case 0:
-			                String nuevoTitulo = "a";
-			                do {
-			                	nuevoTitulo=JOptionPane.showInputDialog("Ingrese el nuevo titulo");
-			                	if (nuevoTitulo.isBlank()) {
-			                		JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setTitulo(nuevoTitulo);								
-							} while (nuevoTitulo.isBlank());
+			            case 0:
+			                String nuevoTitulo = JOptionPane.showInputDialog("Ingrese el nuevo título:");
+			                libroAEditar.setTitulo(nuevoTitulo);
 			                break;
 			            case 1:
-			            	String nuevoAutor = "a";
-			                do {
-			                	nuevoAutor=JOptionPane.showInputDialog("Ingrese el nuevo autor");
-			                	if (nuevoAutor.isBlank()) {
-									JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setAutor(nuevoAutor);								
-							} while (nuevoAutor.isBlank());
+			                String nuevoAutor = JOptionPane.showInputDialog("Ingrese el nuevo autor:");
+			                libroAEditar.setAutor(nuevoAutor);
 			                break;
 			            case 2:
-			            	String nuevoGenero = "a";
-			                do {
-			                	nuevoGenero=JOptionPane.showInputDialog("Ingrese el nuevo género");
-			                	if (nuevoGenero.isBlank()) {
-									JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setGenero(nuevoGenero);							
-							} while (nuevoGenero.isBlank());
+			                String nuevoGenero = JOptionPane.showInputDialog("Ingrese el nuevo género:");
+			                libroAEditar.setGenero(nuevoGenero);
 			                break;
 			            case 3:
-			            	int nuevoStock = 0;
-			                do {
-			                	nuevoStock=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo stock"));
-			                	if (nuevoStock<=0) {
-									JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setStock(nuevoStock);								
-							} while (nuevoStock<=0);
+			                int nuevoStock = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo stock:"));
+			                libroAEditar.setStock(nuevoStock);
 			                break;
 			            case 4:
-			            	String nuevoPrecio = "a";
-			                do {
-			                	nuevoPrecio=JOptionPane.showInputDialog("Ingrese el nuevo precio");
-			                	if (nuevoPrecio.isBlank()) {
-									JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setPrecio(nuevoPrecio);								
-							} while (nuevoPrecio.isBlank());
+			                String nuevoPrecio = JOptionPane.showInputDialog("Ingrese el nuevo precio:");
+			                libroAEditar.setPrecio(nuevoPrecio);
 			                break;
 			            case 5:
-			            	int nuevoIdSucursal = 0;
-			                do {
-			                	nuevoIdSucursal=Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo id de la sucursal"));
-			                	if (nuevoIdSucursal<=0) {
-									JOptionPane.showMessageDialog(null, "Verifique y vuelva a ingresar la información");
-								}
-			                	libroAEditar.setIdSucursal_fk(nuevoIdSucursal);								
-							} while (nuevoIdSucursal<=0 && nuevoIdSucursal>=4);
+			                int nuevaIdSucursal = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la nueva ID de la sucursal:"));
+			                libroAEditar.setIdSucursal_fk(nuevaIdSucursal);
 			                break;
 			            case 6:
 			                
@@ -227,9 +191,7 @@ public class Gerente extends Usuario {
 				switch (ele2) {
 				case 0:
 					String mail = JOptionPane.showInputDialog("Ingrese el mail del usuario:");
-					mail=usuarioControlador.verificarMail(mail);
                     String contraseña = JOptionPane.showInputDialog("Ingrese la contraseña del usuario:");
-                    contraseña=usuarioControlador.verificarContraseña(contraseña);
                     String[] tiposUsuario = {"Gerente", "Empleado", "Escritor"};
                     String tipo = (String) JOptionPane.showInputDialog(null, "Seleccione el tipo de usuario:", "Tipo de Usuario", 
                     		JOptionPane.QUESTION_MESSAGE, null, tiposUsuario, tiposUsuario[0]);
@@ -330,13 +292,11 @@ public class Gerente extends Usuario {
 				        switch (eleEditar) {
 			            case 0:
 			                String nuevoMail = JOptionPane.showInputDialog("Ingrese el nuevo mail:");
-			                usuarioControlador.verificarMail(nuevoMail);
 			                usuarioAEditar.setMail(nuevoMail);
 			                break;
 			            case 1:
-			                String nuevaContraseña = JOptionPane.showInputDialog("Ingrese la nueva contraseña:");
-			                usuarioControlador.verificarContraseña(nuevaContraseña);
-			                usuarioAEditar.setContraseña(nuevaContraseña);
+			                String nuevoContraseña = JOptionPane.showInputDialog("Ingrese la nueva contraseña:");
+			                usuarioAEditar.setContraseña(nuevoContraseña);
 			                break;
 			            case 2:
 			            	String[] tiposUsuario1 = {"Gerente", "Empleado", "Escritor"};
@@ -438,7 +398,41 @@ public class Gerente extends Usuario {
 				break;
 
 			case 3:
-				JOptionPane.showMessageDialog(null, "Función en desarrollo");
+				String[] busqueda = {"Buscar por titulo", "Buscar por id", "Salir"};
+				int opcionselect = JOptionPane.showOptionDialog(null, "Como desea buscar su libro para aplicar descuento", "Librería", 0, 0, null, busqueda, busqueda[0]);
+				switch (opcionselect) {
+				case 0:
+					String titulo = JOptionPane.showInputDialog("Ingrese el titulo del libro a aplicar descuento");
+					if (libroControlador.getLibroByTitulo(titulo)!=null) {
+						JOptionPane.showMessageDialog(null, "Se aplicará descuento a: " +libroControlador.getLibroByTitulo(titulo).toString());
+						String nuevoPrecio = JOptionPane.showInputDialog("Ingrese DESCUENTO % + Nuevo precio");
+						Libro libroAEditar = libroControlador.getLibroByTitulo(titulo);
+						libroAEditar.setPrecio(nuevoPrecio);
+						libroControlador.updateLibro(libroAEditar);
+					} else {
+						JOptionPane.showMessageDialog(null, "No se encontró ningun libro con ese titulo");
+					}
+					break;
+
+				case 1:
+					int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese id del libro a aplicar descuento"));
+					if (libroControlador.getLibroById(id)!=null) {
+						JOptionPane.showMessageDialog(null, "Se aplicará descuento a: " +libroControlador.getLibroById(id).toString());
+						String nuevoPrecio1 = JOptionPane.showInputDialog("Ingrese DESCUENTO % + Nuevo precio");
+						Libro libroAEditar1 = libroControlador.getLibroById(id);
+						libroAEditar1.setPrecio(nuevoPrecio1);
+						libroControlador.updateLibro(libroAEditar1);
+					} else {
+						JOptionPane.showMessageDialog(null, "No se encontró ningun libro con ese id");
+					}
+					
+					break;
+					
+				case 2:
+					
+					break;
+				}
+
 				break;
 			case 4:
 				JOptionPane.showMessageDialog(null, "Gracias por su servicio");
