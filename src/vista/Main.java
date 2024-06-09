@@ -66,7 +66,7 @@ class Main {
 			case 1:
 				
 				String mail2 = "";
-				mail2=usuarioControlador.verificarMail(mail2);
+				//mail2=usuarioControlador.verificarMail(mail2);
 				
 				String contraseña2 = "";
 				contraseña2=usuarioControlador.verificarContraseña(contraseña2);

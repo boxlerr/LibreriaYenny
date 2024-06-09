@@ -19,7 +19,9 @@ public interface UserRepository {
     
     void deleteUser(int id); //eliminar usuarios de la bdd
 
-	String verificarMail(String mail2);
+	boolean verificarMailValido(String mail2);
 
 	String verificarContraseña(String contraseña2);
+
+	boolean verificarMailExistencia(String mail2);
 }
