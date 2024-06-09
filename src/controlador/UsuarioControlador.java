@@ -125,29 +125,28 @@ public class UsuarioControlador implements UserRepository {
     }
     
     @Override
-	public String verificarMail(String mail2) {
-    	int seguir = 0;
-			do {
-				mail2 = JOptionPane.showInputDialog("Ingrese mail");
+	public boolean verificarMailExistencia(String mail) {
 				String mails = "";
 				for (int i = 0; i < this.getAllUsers().size(); i++) {
 					mails = mails + this.getAllUsers().get(i).getMail();
 				}
 				
-				if (mail2.contains("@") && mail2.contains(".")) {
-					seguir = 1;
-					if (mails.contains(mail2)) {
-						JOptionPane.showMessageDialog(null, "Ya existe una cuenta con ese mail, inicie sesion o utilice otro mail");
-						seguir = 0;
-					}
+				if (mails.contains(mail)) {
+					return false;
 				} else {
-					JOptionPane.showMessageDialog(null, "Ingrese un mail válido, debe contener un '@' y un '.'");
+					return true;
+
 				}
-				
-			} while (seguir==0);
-			return mail2;
-		
 		}
+    @Override
+	public boolean verificarMailValido(String mail) {
+    	if (mail.contains("@") && mail.contains(".")) {
+    		return true;
+		} else {
+			return false;
+		}
+		
+	}
     public boolean verificarMailTest(String mail2) {
     	boolean retorno = true;
 				String mails = "";
@@ -201,6 +200,8 @@ public class UsuarioControlador implements UserRepository {
 			return retorno;
 		
 		}
+
+	
 
   
 }
