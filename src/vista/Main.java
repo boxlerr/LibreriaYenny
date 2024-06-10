@@ -69,7 +69,7 @@ class Main {
 				//mail2=usuarioControlador.verificarMail(mail2);
 				
 				String contraseña2 = "";
-				contraseña2=usuarioControlador.verificarContraseña(contraseña2);
+//				contraseña2=usuarioControlador.verificarContraseña(contraseña2);
 				
 				
 				String nombre = JOptionPane.showInputDialog("Ingrese nombre");

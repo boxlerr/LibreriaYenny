@@ -21,7 +21,11 @@ public interface UserRepository {
 
 	boolean verificarMailValido(String mail2);
 
-	String verificarContraseña(String contraseña2);
-
 	boolean verificarMailExistencia(String mail2);
+
+	boolean verificarContraseñaCaracteres(String contraseña);
+
+	boolean verificarNumeros(String verificacion);
+
+	boolean VerificarDNI(String DNI);
 }

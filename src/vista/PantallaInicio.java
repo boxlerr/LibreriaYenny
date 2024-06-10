@@ -58,6 +58,7 @@ public class PantallaInicio extends JFrame {
 		EscritorControlador escritorControlador = new EscritorControlador();
 		LibroControlador libroControlador = new LibroControlador();
 		BibliotecaControlador bibliotecaControlador = new BibliotecaControlador();
+		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 319);
 		contentPane = new JPanel();

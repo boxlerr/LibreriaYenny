@@ -166,25 +166,27 @@ public class UsuarioControlador implements UserRepository {
 		}
     
     @Override
-	public String verificarContraseña(String contraseña2) {
-    	int seguir = 0;
-			do {
-				contraseña2 = JOptionPane.showInputDialog("Ingrese contraseña (Esta debe contener mínimo 6 caracteres y al menos un número)");
+	public boolean verificarContraseñaCaracteres(String contraseña) {
+    					
+				if (contraseña.length()<6) {
+					return false;
+				} 
+				return true;
 				
-				if (contraseña2.isBlank()) {
-					JOptionPane.showMessageDialog(null, "Debe ingresar una contraseña");
-				} else if (contraseña2.length()<6) {
-					JOptionPane.showMessageDialog(null, "La contraseña debe tener al menos 6 caracteres");
-				} else if (!contraseña2.contains("1")&&!contraseña2.contains("2")&&!contraseña2.contains("3")&&!contraseña2.contains("4")&&!contraseña2.contains("5")&&!contraseña2.contains("6")&&!contraseña2.contains("7")&&!contraseña2.contains("8")&&!contraseña2.contains("9")) {
-					JOptionPane.showMessageDialog(null, "La contraseña debe contener al menos un número");
-				} else {
-					seguir = 1;
-				}
-				
-			} while (seguir==0);
-			return contraseña2;
 		
 		}
+    
+    @Override
+	public boolean verificarNumeros(String verificacion) {
+    					
+    	if (!verificacion.contains("1")&&!verificacion.contains("2")&&!verificacion.contains("3")&&!verificacion.contains("4")&&!verificacion.contains("5")&&!verificacion.contains("6")&&!verificacion.contains("7")&&!verificacion.contains("8")&&!verificacion.contains("9")) {
+					return false;
+				} 
+				return true;
+				
+		
+		}
+    
     public boolean verificarContraseñaTest(String contraseña2) {
     	boolean retorno = true;
 				
@@ -200,6 +202,21 @@ public class UsuarioControlador implements UserRepository {
 			return retorno;
 		
 		}
+    
+    @Override
+	public boolean VerificarDNI(String DNI) {
+		if (DNI.length()==8) {
+			for (int i = 0; i < DNI.length(); i++) {
+	            if (Character.isLetter(DNI.charAt(i))) {
+	                return false;
+	            }
+	        }
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
 
 	
 
