@@ -120,4 +120,22 @@ public class VentasControlador implements VentasRepository {
             ex.printStackTrace();
         }
     }
+	public boolean deleteVenta(int id) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ventas WHERE id = ?");
+            statement.setInt(1, id);
+            
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("venta eliminada exitosamente");
+                return true;
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+
+        }
+    }
 }

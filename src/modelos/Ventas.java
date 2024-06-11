@@ -25,6 +25,10 @@ public class Ventas {
         this.fechaVenta = fechaVenta;
     }
 	
+	public Ventas() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getIdVenta() {
 		return idVenta;
 	}
@@ -52,13 +56,13 @@ public class Ventas {
 	public double getValorUnitario() {
 		return valorUnitario;
 	}
-	public void setValorUnitario(int valorUnitario) {
+	public void setValorUnitario(double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
 	public double getValorTotal() {
 		return valorTotal;
 	}
-	public void setValorTotal(int valorTotal) {
+	public void setValorTotal(double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 	public LocalDate getFechaVenta() {
