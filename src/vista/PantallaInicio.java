@@ -124,7 +124,8 @@ public class PantallaInicio extends JFrame {
 					case "gerente":
 						dispose();
 						JOptionPane.showMessageDialog(null, "Ingresa como gerente: " + gerenteControlador.getGerenteById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));
-						gerenteControlador.getGerenteById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
+						//gerenteControlador.getGerenteById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
+						PantallaGerente pantallaGerente = new PantallaGerente();
 						break;
 					case "empleado":
 						dispose();

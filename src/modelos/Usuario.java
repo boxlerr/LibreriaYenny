@@ -32,6 +32,9 @@ public class Usuario {
 		this.contraseña = contraseña;
 		this.tipo = tipo;
 	}
+	public Usuario() {
+		
+	}
 
 	@Override
 	public String toString() {
