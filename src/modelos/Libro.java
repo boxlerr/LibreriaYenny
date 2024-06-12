@@ -33,6 +33,9 @@ public class Libro {
 		this.precio = precio;
 		this.idSucursal_fk = idSucursal_fk;
 	}
+	public Libro() {
+		
+	}
 	@Override
 	public String toString() {
 		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", genero=" + genero

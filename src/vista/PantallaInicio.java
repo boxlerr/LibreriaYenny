@@ -123,18 +123,14 @@ public class PantallaInicio extends JFrame {
 					switch (usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText()).getTipo()) {
 					case "gerente":
 						dispose();
-						JOptionPane.showMessageDialog(null, "Ingresa como gerente: " + gerenteControlador.getGerenteById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));
-						//gerenteControlador.getGerenteById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						PantallaGerente pantallaGerente = new PantallaGerente();
 						break;
 					case "empleado":
 						dispose();
-						JOptionPane.showMessageDialog(null, "Ingresa como empleado: " + empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));
 						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
 					case "escritor":
 						dispose();
-						JOptionPane.showMessageDialog(null, "Ingresa como escritor: " + escritorControlador.getEscritorById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));
 						escritorControlador.getEscritorById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
 						break;
 					case "cliente":

@@ -34,7 +34,7 @@ public class PantallaGerente extends JFrame {
 	public PantallaGerente() {
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 452, 303);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -52,7 +52,7 @@ public class PantallaGerente extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnAdministrarLibros.setBounds(46, 96, 142, 34);
+		btnAdministrarLibros.setBounds(40, 96, 154, 34);
 		contentPane.add(btnAdministrarLibros);
 		
 		JButton btnAdministrarCuentas = new JButton("Administrar Cuentas");
@@ -66,6 +66,12 @@ public class PantallaGerente extends JFrame {
 		contentPane.add(btnAdministrarCuentas);
 		
 		JButton btnVerInventario = new JButton("Ver Inventario");
+		btnVerInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaVerInventario pantallaVerInventario = new PantallaVerInventario();
+			}
+		});
 		btnVerInventario.setBounds(234, 96, 153, 34);
 		contentPane.add(btnVerInventario);
 		
@@ -74,6 +80,14 @@ public class PantallaGerente extends JFrame {
 		contentPane.add(btnAplicarDescuento);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+		btnCerrarSesion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaInicio pantallaInicio = new PantallaInicio();
+				
+			}
+			
+		});
 		btnCerrarSesion.setBounds(162, 216, 117, 34);
 		contentPane.add(btnCerrarSesion);
 	}
