@@ -8,7 +8,10 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import controlador.*;
@@ -27,6 +30,7 @@ public class PantallaCuentas extends JFrame {
     private UsuarioControlador controlador;
     private Usuario seleccionado;
     private JButton Editar;
+
 
     
 	public PantallaCuentas() {
@@ -57,14 +61,19 @@ public class PantallaCuentas extends JFrame {
 		contentPane.add(lblSeleccionado);
 		
 		JButton btnAgregar = new JButton("Agregar ");
+		btnAgregar.setBounds(15, 207, 89, 43);
 		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				Agregar agregar = new Agregar();
+				dispose();
+				
 			}
 		});
-		btnAgregar.setBounds(41, 207, 89, 43);
 		contentPane.add(btnAgregar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(119, 207, 89, 43);
 		btnEliminar.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -78,7 +87,6 @@ public class PantallaCuentas extends JFrame {
 				}
         	}
         });
-		btnEliminar.setBounds(171, 207, 89, 43);
 		contentPane.add(btnEliminar);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -94,10 +102,43 @@ public class PantallaCuentas extends JFrame {
 				}		
         	}
         });
-		btnEditar.setBounds(301, 207, 89, 43);
+		btnEditar.setBounds(223, 207, 89, 43);
 		contentPane.add(btnEditar);
 		
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaGerente pantallaGerente = new PantallaGerente();
+			}
+		});
+		btnVolver.setBounds(327, 207, 89, 43);
+		contentPane.add(btnVolver);
+		
 	
+		ListSelectionModel selectionModel = table.getSelectionModel();
+        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        selectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        int id = (int) table.getValueAt(selectedRow, 0);
+                        String mail = (String) table.getValueAt(selectedRow, 1);
+                        String contraseña = (String) table.getValueAt(selectedRow, 2);
+                        String tipo = (String) table.getValueAt(selectedRow, 3);
+                        lblSeleccionado.setText("Seleccionado: ID = " + id + ", Mail = " + mail + ", Contraseña = " + contraseña + "Tipo de Usuario = " + tipo );
+                        seleccionado.setMail(mail);
+                        seleccionado.setContraseña(contraseña);
+                        seleccionado.setId(id);
+                        seleccionado.setTipo(tipo);
+                    }
+                }
+            }
+        });
+		
 	}
 	
 	private void actualizarTabla() {
