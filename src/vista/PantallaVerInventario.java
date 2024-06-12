@@ -106,7 +106,7 @@ public class PantallaVerInventario extends JFrame {
                         String genero = (String) table.getValueAt(selectedRow, 3);
                         int stock = (int) table.getValueAt(selectedRow, 4);
                         String precio = (String) table.getValueAt(selectedRow, 5);
-                        int idSucursal = (int) table.getValueAt(selectedRow, 5);
+                        int idSucursal = (int) table.getValueAt(selectedRow, 6);
                         lblSeleccionado.setText("Seleccionado: ID = " + id + ", Título = " + titulo + ", Autor = " + autor + "Género = " + genero + "Stock = " + stock + "Precio = " + precio + "ID_Sucursal = " + idSucursal );
                         libroSeleccionado.setIdLibro(id);
                         libroSeleccionado.setTitulo(titulo);
