@@ -65,11 +65,11 @@ public class tablaVentas extends JFrame {
         actualizarTabla();
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(5, 19, 911, 190);
+        scrollPane.setBounds(5, 19, 880, 190);
         contentPane.add(scrollPane);
 
         elemento = new JLabel("Seleccionado:");
-        elemento.setBounds(5, 5, 911, 14);
+        elemento.setBounds(5, 5, 880, 14);
         contentPane.add(elemento);
 
         eliminarBtn = new JButton("Eliminar");
@@ -99,10 +99,6 @@ public class tablaVentas extends JFrame {
         });
         btnEditar.setBounds(367, 280, 166, 58);
         contentPane.add(btnEditar);
-
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBounds(15, 220, 101, 22);
-        contentPane.add(menuBar);
         
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
