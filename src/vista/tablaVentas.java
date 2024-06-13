@@ -32,7 +32,7 @@ public class tablaVentas extends JFrame {
     private VentasControlador controlador;
     private JLabel elemento;
     private Ventas seleccionado;
-    private JButton editarBtn;
+    private JButton btnEditar;
     private JButton eliminarBtn;
 
     public static void main(String[] args) {
@@ -48,6 +48,7 @@ public class tablaVentas extends JFrame {
         });
     }
     public tablaVentas() {
+		this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 909, 452);
         contentPane = new JPanel();
@@ -86,8 +87,8 @@ public class tablaVentas extends JFrame {
         eliminarBtn.setBounds(53, 280, 187, 58);
         contentPane.add(eliminarBtn);
 
-        editarBtn = new JButton("Editar");
-        editarBtn.addActionListener(new ActionListener() {
+        btnEditar = new JButton("Editar");
+        btnEditar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (seleccionado.getIdVenta() != 0) {
                     datoAModificar();
@@ -96,12 +97,22 @@ public class tablaVentas extends JFrame {
                 }
             }
         });
-        editarBtn.setBounds(367, 280, 166, 58);
-        contentPane.add(editarBtn);
+        btnEditar.setBounds(367, 280, 166, 58);
+        contentPane.add(btnEditar);
 
         JMenuBar menuBar = new JMenuBar();
         menuBar.setBounds(15, 220, 101, 22);
         contentPane.add(menuBar);
+        
+        JButton btnVolver = new JButton("Volver");
+        btnVolver.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                PantallaEmpleado pantallaEmpleado = new PantallaEmpleado();
+            }
+        });
+        btnVolver.setBounds(672, 280, 166, 58);
+        contentPane.add(btnVolver);
 
         ListSelectionModel selectionModel = table.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -147,39 +158,39 @@ public class tablaVentas extends JFrame {
     private void datoAModificar() {
         JFrame dialog = new JFrame("Editar Venta");
         dialog.setSize(400, 400);
-        dialog.setLayout(null);
+        dialog.getContentPane().setLayout(null);
 
         JLabel labelIdLibro = new JLabel("ID Libro:");
         labelIdLibro.setBounds(10, 10, 80, 25);
-        dialog.add(labelIdLibro);
+        dialog.getContentPane().add(labelIdLibro);
 
         JTextField fieldIdLibro = new JTextField(String.valueOf(seleccionado.getIdLibro()));
         fieldIdLibro.setBounds(100, 10, 160, 25);
-        dialog.add(fieldIdLibro);
+        dialog.getContentPane().add(fieldIdLibro);
 
         JLabel labelIdEmpleado = new JLabel("ID Empleado:");
         labelIdEmpleado.setBounds(10, 40, 80, 25);
-        dialog.add(labelIdEmpleado);
+        dialog.getContentPane().add(labelIdEmpleado);
 
         JTextField fieldIdEmpleado = new JTextField(String.valueOf(seleccionado.getIdEmpleado()));
         fieldIdEmpleado.setBounds(100, 40, 160, 25);
-        dialog.add(fieldIdEmpleado);
+        dialog.getContentPane().add(fieldIdEmpleado);
 
         JLabel labelCantidad = new JLabel("Cantidad:");
         labelCantidad.setBounds(10, 70, 80, 25);
-        dialog.add(labelCantidad);
+        dialog.getContentPane().add(labelCantidad);
 
         JTextField fieldCantidad = new JTextField(String.valueOf(seleccionado.getCantidad()));
         fieldCantidad.setBounds(100, 70, 160, 25);
-        dialog.add(fieldCantidad);
+        dialog.getContentPane().add(fieldCantidad);
 
         JLabel labelValorUnitario = new JLabel("Valor Unitario:");
         labelValorUnitario.setBounds(10, 100, 80, 25);
-        dialog.add(labelValorUnitario);
+        dialog.getContentPane().add(labelValorUnitario);
 
         JTextField fieldValorUnitario = new JTextField(String.valueOf(seleccionado.getValorUnitario()));
         fieldValorUnitario.setBounds(100, 100, 160, 25);
-        dialog.add(fieldValorUnitario);
+        dialog.getContentPane().add(fieldValorUnitario);
 
         JButton saveButton = new JButton("Editar");
         saveButton.setBounds(100, 150, 100, 25);
@@ -200,7 +211,7 @@ public class tablaVentas extends JFrame {
                 }
             }
         });
-        dialog.add(saveButton);
+        dialog.getContentPane().add(saveButton);
         dialog.setVisible(true);
     }
 }

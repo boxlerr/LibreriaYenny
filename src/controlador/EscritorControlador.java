@@ -56,6 +56,8 @@ public class EscritorControlador implements EscritorRepository {
         }
     }
 	
+	
+	
 	@Override
 	public void deleteEscritor(int idEscritor) {
 		try {

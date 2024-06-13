@@ -57,7 +57,7 @@ public class PantallaCuentas extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JLabel lblSeleccionado = new JLabel("Seleccionado:");
-		lblSeleccionado.setBounds(10, 7, 75, 14);
+		lblSeleccionado.setBounds(10, 7, 414, 14);
 		contentPane.add(lblSeleccionado);
 		
 		JButton btnAgregar = new JButton("Agregar ");
