@@ -84,6 +84,8 @@ public class PantallaPrestamos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Seleccione un préstamo.");
                 }
             }
+        	
+        	//holaaa
         });
         contentPane.add(btnDevolver);
 
