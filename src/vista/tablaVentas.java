@@ -1,4 +1,5 @@
 package vista;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -31,6 +33,8 @@ public class tablaVentas extends JFrame {
     private JLabel elemento;
     private Ventas seleccionado;
     private JButton editarBtn;
+    private JButton eliminarBtn;
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -44,11 +48,11 @@ public class tablaVentas extends JFrame {
         });
     }
     public tablaVentas() {
-        this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 909, 452);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        contentPane.setLayout(null); // Set layout before adding components
         setContentPane(contentPane);
 
         controlador = new VentasControlador();
@@ -58,7 +62,6 @@ public class tablaVentas extends JFrame {
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
         actualizarTabla();
-        contentPane.setLayout(null);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(5, 19, 911, 190);
@@ -68,28 +71,26 @@ public class tablaVentas extends JFrame {
         elemento.setBounds(5, 5, 911, 14);
         contentPane.add(elemento);
 
-        JButton eliminarBtn = new JButton("Eliminar");
+        eliminarBtn = new JButton("Eliminar");
         eliminarBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (seleccionado.getIdVenta() != 0) {
-                    if (controlador.deleteVenta(seleccionado.getIdVenta())) {
-                        JOptionPane.showMessageDialog(null, "Venta eliminada exitosamente");
-                        actualizarTabla();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al eliminar la venta");
-                    }
+                    controlador.deleteVenta(seleccionado.getIdVenta());
+                    JOptionPane.showMessageDialog(null, "Venta eliminada exitosamente");
+                    actualizarTabla();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Seleccione una venta");
+                    JOptionPane.showMessageDialog(null, "Error al eliminar la venta");
                 }
             }
         });
         eliminarBtn.setBounds(53, 280, 187, 58);
         contentPane.add(eliminarBtn);
+
         editarBtn = new JButton("Editar");
         editarBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (seleccionado.getIdVenta() != 0) {        
-                    JOptionPane.showMessageDialog(null, "Funcionalidad de edición aún no implementada");
+                if (seleccionado.getIdVenta() != 0) {
+                    datoAModificar();
                 } else {
                     JOptionPane.showMessageDialog(null, "Seleccione una venta");
                 }
@@ -130,13 +131,76 @@ public class tablaVentas extends JFrame {
                     }
                 }
             }
-        });
+        });       
+        contentPane.revalidate();
+        contentPane.repaint();
     }
+
     private void actualizarTabla() {
         model.setRowCount(0);
         List<Ventas> ventas = controlador.obtenerListaVentas();
         for (Ventas venta : ventas) {
-            model.addRow(new Object[] { venta.getIdVenta(), venta.getIdLibro(), venta.getIdEmpleado(), venta.getCantidad(), venta.getValorUnitario(), venta.getValorTotal(), venta.getFechaVenta() });
+            model.addRow(new Object[] { venta.getIdVenta(), venta.getIdLibro(), venta.getIdEmpleado(), venta.getCantidad(), venta.getValorUnitario(), venta.getValorTotal(), venta.getFechaVenta()});
         }
+    }
+
+    private void datoAModificar() {
+        JFrame dialog = new JFrame("Editar Venta");
+        dialog.setSize(400, 400);
+        dialog.setLayout(null);
+
+        JLabel labelIdLibro = new JLabel("ID Libro:");
+        labelIdLibro.setBounds(10, 10, 80, 25);
+        dialog.add(labelIdLibro);
+
+        JTextField fieldIdLibro = new JTextField(String.valueOf(seleccionado.getIdLibro()));
+        fieldIdLibro.setBounds(100, 10, 160, 25);
+        dialog.add(fieldIdLibro);
+
+        JLabel labelIdEmpleado = new JLabel("ID Empleado:");
+        labelIdEmpleado.setBounds(10, 40, 80, 25);
+        dialog.add(labelIdEmpleado);
+
+        JTextField fieldIdEmpleado = new JTextField(String.valueOf(seleccionado.getIdEmpleado()));
+        fieldIdEmpleado.setBounds(100, 40, 160, 25);
+        dialog.add(fieldIdEmpleado);
+
+        JLabel labelCantidad = new JLabel("Cantidad:");
+        labelCantidad.setBounds(10, 70, 80, 25);
+        dialog.add(labelCantidad);
+
+        JTextField fieldCantidad = new JTextField(String.valueOf(seleccionado.getCantidad()));
+        fieldCantidad.setBounds(100, 70, 160, 25);
+        dialog.add(fieldCantidad);
+
+        JLabel labelValorUnitario = new JLabel("Valor Unitario:");
+        labelValorUnitario.setBounds(10, 100, 80, 25);
+        dialog.add(labelValorUnitario);
+
+        JTextField fieldValorUnitario = new JTextField(String.valueOf(seleccionado.getValorUnitario()));
+        fieldValorUnitario.setBounds(100, 100, 160, 25);
+        dialog.add(fieldValorUnitario);
+
+        JButton saveButton = new JButton("Editar");
+        saveButton.setBounds(100, 150, 100, 25);
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int idLibro = Integer.parseInt(fieldIdLibro.getText());
+                int idEmpleado = Integer.parseInt(fieldIdEmpleado.getText());
+                int cantidad = Integer.parseInt(fieldCantidad.getText());
+                double valorUnitario = Double.parseDouble(fieldValorUnitario.getText());
+                double valorTotal = cantidad * valorUnitario;
+                LocalDate fechaVenta = seleccionado.getFechaVenta(); 
+                Ventas updatedVenta = new Ventas(seleccionado.getIdVenta(), idLibro, idEmpleado, cantidad, valorUnitario, valorTotal, fechaVenta);
+                if (controlador.updateVenta(updatedVenta)) {      
+                    actualizarTabla();
+                    dialog.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error al actualizar la venta");
+                }
+            }
+        });
+        dialog.add(saveButton);
+        dialog.setVisible(true);
     }
 }

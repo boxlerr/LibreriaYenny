@@ -114,7 +114,8 @@ public class PantallaEmpleado extends JFrame {
         JButton btnVerVentas = new JButton("Ver Ventas");
         btnVerVentas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                verVentas();
+                dispose();
+                tablaVentas tablaVentas = new tablaVentas();
             }
         });
         btnVerVentas.setBounds(234, 214, 153, 34);

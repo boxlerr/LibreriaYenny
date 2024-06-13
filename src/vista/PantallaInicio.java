@@ -131,7 +131,9 @@ public class PantallaInicio extends JFrame {
 						dispose();
 						JOptionPane.showMessageDialog(null, "Ingresa como empleado: " + empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));
 						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
+			
 						break;
+						
 					case "escritor":
 						dispose();
 						JOptionPane.showMessageDialog(null, "Ingresa como escritor: " + escritorControlador.getEscritorById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())));

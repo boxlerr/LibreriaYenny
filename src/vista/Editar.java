@@ -127,9 +127,6 @@ public class Editar extends JFrame {
 				} 
 			}
 		});
-		contentPane.add(btnEditar);
-		
-		
-		
+		contentPane.add(btnEditar);	
 	}
 }
