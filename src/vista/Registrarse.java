@@ -153,7 +153,7 @@ public class Registrarse extends JFrame {
 		JLabel lblErrorContrasenaCaracteres = new JLabel("La contraseña debe contener al menos 6 caracteres");
 		lblErrorContrasenaCaracteres.setForeground(new Color(255, 0, 0));
 		lblErrorContrasenaCaracteres.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblErrorContrasenaCaracteres.setBounds(14, 187, 213, 13);
+		lblErrorContrasenaCaracteres.setBounds(18, 187, 213, 13);
 		contentPane.add(lblErrorContrasenaCaracteres);
 		lblErrorContrasenaCaracteres.setVisible(false);
 		
@@ -161,7 +161,7 @@ public class Registrarse extends JFrame {
 		lblErrorContrasenaBlank = new JLabel("Ingrese una contraseña");
 		lblErrorContrasenaBlank.setForeground(new Color(255, 0, 0));
 		lblErrorContrasenaBlank.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblErrorContrasenaBlank.setBounds(70, 187, 101, 13);
+		lblErrorContrasenaBlank.setBounds(101, 142, 101, 13);
 		contentPane.add(lblErrorContrasenaBlank);
 		lblErrorContrasenaBlank.setVisible(false);
 		
@@ -311,19 +311,6 @@ public class Registrarse extends JFrame {
 					
 				}
 				
-				
-				
-//				String contraseña2 = "";
-//				contraseña2=usuarioControlador.verificarContraseña(contraseña2);
-//				
-//				
-//				String nombre = JOptionPane.showInputDialog("Ingrese nombre");
-//				String apellido = JOptionPane.showInputDialog("Ingrese apellido");
-//				int dni = Integer.parseInt(JOptionPane.showInputDialog("Ingrese dni"));
-//				
-//				usuarioControlador.addUser(new Usuario(mail, contraseña2, "Escritor"));
-//				escritorControlador.addEscritor(usuarioControlador.getUserById(mail, contraseña2), new Escritor(mail, contraseña2, "Escritor", nombre, apellido, dni));
-//				
 				
 			}
 			

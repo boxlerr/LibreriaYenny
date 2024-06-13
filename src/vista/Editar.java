@@ -100,7 +100,7 @@ public class Editar extends JFrame {
 		contentPane.add(lblIngreseNuevoTipo);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(335, 110, 76, 45);
+		btnEditar.setBounds(335, 91, 76, 45);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String mails="";
@@ -127,6 +127,21 @@ public class Editar extends JFrame {
 				} 
 			}
 		});
-		contentPane.add(btnEditar);	
+		contentPane.add(btnEditar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaCuentas pantallaCuentas = new PantallaCuentas();
+				
+			}
+			
+		});
+		btnCancelar.setBounds(335, 151, 76, 45);
+		contentPane.add(btnCancelar);
+		
+		
+		
 	}
 }

@@ -117,6 +117,19 @@ public class Agregar extends JFrame {
 		contentPane.add(btnAgregar);
 		
 		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaCuentas pantallaCuentas = new PantallaCuentas();
+				
+			}
+			
+		});
+		btnCancelar.setBounds(335, 151, 89, 45);
+		contentPane.add(btnCancelar);
+		
+		
 		
 	}
 }
