@@ -12,5 +12,7 @@ public interface VentasRepository {
 	List<Ventas> obtenerVentasEmpleado(int idEmpleado);
 	List<Ventas> obtenerVentasSucursal(int idSucursal);
 	List<Ventas> obtenerListaVentas();
+	boolean deleteVenta(int id);
+	boolean updateVenta(Ventas updateVenta);
 
 }

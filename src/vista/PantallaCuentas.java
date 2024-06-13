@@ -95,8 +95,7 @@ public class PantallaCuentas extends JFrame {
         		if (seleccionado.getId()!=0) {
 					
         			Editar editar = new Editar(seleccionado);
-        			dispose();
-        			
+        			dispose();			
 				} else {
 					JOptionPane.showMessageDialog(null, "Seleccione un usuario");
 				}		

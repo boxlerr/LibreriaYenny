@@ -1,10 +1,7 @@
 package vista;
 import javax.swing.JOptionPane;
-
 import org.hamcrest.core.StringContains;
-
 import com.mysql.jdbc.Connection;
-
 import controlador.*;
 import modelos.*;
 
