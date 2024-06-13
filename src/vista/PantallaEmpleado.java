@@ -19,20 +19,12 @@ public class PantallaEmpleado extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private Empleado empleado;
-    private LibroControlador libroControlador;
-    private BibliotecaControlador bibliotecaControlador;
-    private UsuarioControlador usuarioControlador;
-    private GerenteControlador gerenteControlador;
-    private EmpleadoControlador empleadoControlador;
-    private EscritorControlador escritorControlador;
-    private PrestamoControlador prestamoControlador;  // Añadir controlador de préstamos
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    PantallaEmpleado frame = new PantallaEmpleado(null, null, null, null, null, null, null, null);
+                    PantallaEmpleado frame = new PantallaEmpleado();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,18 +33,8 @@ public class PantallaEmpleado extends JFrame {
         });
     }
 
-    public PantallaEmpleado(Empleado empleado, LibroControlador libroControlador, BibliotecaControlador bibliotecaControlador,
-                            UsuarioControlador usuarioControlador, GerenteControlador gerenteControlador,
-                            EmpleadoControlador empleadoControlador, EscritorControlador escritorControlador,
-                            PrestamoControlador prestamoControlador) {  // Añadir controlador de préstamos
-        this.empleado = empleado;
-        this.libroControlador = libroControlador;
-        this.bibliotecaControlador = bibliotecaControlador;
-        this.usuarioControlador = usuarioControlador;
-        this.gerenteControlador = gerenteControlador;
-        this.empleadoControlador = empleadoControlador;
-        this.escritorControlador = escritorControlador;
-        this.prestamoControlador = prestamoControlador;  // Inicializar controlador de préstamos
+    public PantallaEmpleado() { 
+		this.setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 400);  // Aumentar el tamaño de la ventana
@@ -161,8 +143,8 @@ public class PantallaEmpleado extends JFrame {
     }
 
     private void verVentas() {
-        // Implementación del método verVentas basado en tu código original
-    	//JULI ACA PONE EL TABLASVENTAS 
+    	dispose();
+        tablaVentas tablaventas = new tablaVentas();
     }
 
     private void cerrarSesion() {

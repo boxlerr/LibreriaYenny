@@ -43,6 +43,7 @@ public class PantallaPrestamos extends JFrame {
     }
 
     public PantallaPrestamos() {
+		this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 400);
         contentPane = new JPanel();
@@ -62,7 +63,7 @@ public class PantallaPrestamos extends JFrame {
         contentPane.add(scrollPane);
 
         JLabel lblSeleccionado = new JLabel("Seleccionado:");
-        lblSeleccionado.setBounds(10, 7, 150, 14);
+        lblSeleccionado.setBounds(10, 7, 564, 14);
         contentPane.add(lblSeleccionado);
 
         JButton btnDevolver = new JButton("Devolver");
@@ -84,8 +85,6 @@ public class PantallaPrestamos extends JFrame {
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                // Aquí puedes redirigir a la pantalla principal o a otra pantalla específica
-                // Ejemplo: new PantallaPrincipal().setVisible(true);
             }
         });
         btnVolver.setBounds(474, 291, 100, 43);

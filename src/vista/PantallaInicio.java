@@ -127,8 +127,8 @@ public class PantallaInicio extends JFrame {
 						break;
 					case "empleado":
 						dispose();
-						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
-			
+						PantallaEmpleado pantallaempleado = new PantallaEmpleado();
+
 						break;
 						
 					case "escritor":
