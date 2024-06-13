@@ -142,10 +142,8 @@ public class PantallaInicio extends JFrame {
 				} else {
 					lblErrorCliente.setVisible(false);
 					lblError.setVisible(true);
-				}
-				
+				}	
 			}
-			
 		});
 		btnIngresar.setBounds(104, 210, 105, 32);
 		contentPane.add(btnIngresar);

@@ -162,6 +162,7 @@ public class PantallaEmpleado extends JFrame {
 
     private void verVentas() {
         // Implementación del método verVentas basado en tu código original
+    	//JULI ACA PONE EL TABLASVENTAS 
     }
 
     private void cerrarSesion() {
