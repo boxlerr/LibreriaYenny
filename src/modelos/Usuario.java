@@ -36,6 +36,10 @@ public class Usuario {
 		
 	}
 
+	public Usuario(String text, String text2, Object selectedItem) {
+		
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", mail=" + mail + ", contraseña=" + contraseña + ", tipo=" + tipo + "]";

@@ -217,8 +217,5 @@ public class UsuarioControlador implements UserRepository {
 		}
 		
 	}
-
-	
-
   
 }
