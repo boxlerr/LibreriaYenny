@@ -160,6 +160,10 @@ public class PantallaVerInventario extends JFrame {
 		btnEliminarFiltros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarTabla();
+				inpFiltrarTitulo.setText(null);
+				inpFiltrarAutor.setText(null);
+				inpFiltrarGenero.setText(null);
+				inpFiltroSucursal.setText(null);
 			}
 		});
 		btnEliminarFiltros.setBounds(575, 345, 139, 43);
