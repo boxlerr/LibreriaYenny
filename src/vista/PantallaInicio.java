@@ -127,8 +127,10 @@ public class PantallaInicio extends JFrame {
 						break;
 					case "empleado":
 						dispose();
-						empleadoControlador.getEmpleadoById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
+						PantallaEmpleado pantallaempleado = new PantallaEmpleado();
+
 						break;
+						
 					case "escritor":
 						dispose();
 						escritorControlador.getEscritorById(usuarioControlador.getUserById(inpMail.getText(), inpContrasena.getText())).Ingreso(libroControlador, bibliotecaControlador, usuarioControlador, gerenteControlador, empleadoControlador, escritorControlador);
@@ -140,10 +142,8 @@ public class PantallaInicio extends JFrame {
 				} else {
 					lblErrorCliente.setVisible(false);
 					lblError.setVisible(true);
-				}
-				
+				}	
 			}
-			
 		});
 		btnIngresar.setBounds(104, 210, 105, 32);
 		contentPane.add(btnIngresar);

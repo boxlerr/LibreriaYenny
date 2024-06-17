@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import interfaces.VentasRepository;
 import modelos.Ventas;
 
@@ -120,4 +123,46 @@ public class VentasControlador implements VentasRepository {
             ex.printStackTrace();
         }
     }
+	@Override
+	public boolean deleteVenta(int idVenta) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM ventas WHERE idVenta = ?");
+            statement.setInt(1, idVenta);
+           
+            int rowsDeleted = statement.executeUpdate();
+            if (rowsDeleted > 0) {
+                
+                return true;
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        	}
+        }
+@Override
+    public boolean updateVenta(Ventas updateVenta) {
+        try {            
+            PreparedStatement statement = connection.prepareStatement("UPDATE ventas SET idLibro = ?, idEmpleado = ?, cantidad = ?, valorUnitario = ?, valorTotal = ?, fechaVenta = ? WHERE idVenta = ?");       
+            statement.setInt(1, updateVenta.getIdLibro());
+            statement.setInt(2, updateVenta.getIdEmpleado());
+            statement.setInt(3, updateVenta.getCantidad());
+            statement.setDouble(4, updateVenta.getValorUnitario());
+            statement.setDouble(5, updateVenta.getValorTotal());
+            statement.setDate(6, java.sql.Date.valueOf(updateVenta.getFechaVenta()));
+            statement.setInt(7, updateVenta.getIdVenta());
+            
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Venta actualizada exitosamente");
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

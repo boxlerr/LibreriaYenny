@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -43,6 +44,7 @@ public class PantallaPrestamos extends JFrame {
     }
 
     public PantallaPrestamos() {
+		this.setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 600, 400);
         contentPane = new JPanel();
@@ -62,21 +64,28 @@ public class PantallaPrestamos extends JFrame {
         contentPane.add(scrollPane);
 
         JLabel lblSeleccionado = new JLabel("Seleccionado:");
-        lblSeleccionado.setBounds(10, 7, 150, 14);
+        lblSeleccionado.setBounds(10, 7, 564, 14);
         contentPane.add(lblSeleccionado);
 
         JButton btnDevolver = new JButton("Devolver");
         btnDevolver.setBounds(10, 291, 100, 43);
         btnDevolver.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        	public void actionPerformed(ActionEvent e) {
                 if (prestamoSeleccionado != null) {
-                    prestamoControlador.devolverLibro(prestamoSeleccionado.getIdPrestamo());
-                    JOptionPane.showMessageDialog(null, "Libro devuelto con éxito.");
-                    actualizarTabla();
+                    try {
+                        prestamoControlador.devolverLibro(prestamoSeleccionado.getIdPrestamo());
+                        JOptionPane.showMessageDialog(null, "Libro devuelto con éxito.");
+                        actualizarTabla();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "Error al devolver el libro: " + ex.getMessage());
+                        ex.printStackTrace();
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Seleccione un préstamo.");
                 }
             }
+        	
+        	//holaaa
         });
         contentPane.add(btnDevolver);
 
@@ -84,8 +93,6 @@ public class PantallaPrestamos extends JFrame {
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                // Aquí puedes redirigir a la pantalla principal o a otra pantalla específica
-                // Ejemplo: new PantallaPrincipal().setVisible(true);
             }
         });
         btnVolver.setBounds(474, 291, 100, 43);
@@ -94,22 +101,30 @@ public class PantallaPrestamos extends JFrame {
         ListSelectionModel selectionModel = table.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         selectionModel.addListSelectionListener(new ListSelectionListener() {
-            @Override
+        	@Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = table.getSelectedRow();
                     if (selectedRow != -1) {
-                        int idPrestamo = (int) table.getValueAt(selectedRow, 0);
-                        int idLibro = (int) table.getValueAt(selectedRow, 1);
-                        int idSucursal = (int) table.getValueAt(selectedRow, 2);
-                        String fechaPrestamo = table.getValueAt(selectedRow, 3).toString();
-                        String fechaDevolucion = table.getValueAt(selectedRow, 4) != null ? table.getValueAt(selectedRow, 4).toString() : null;
-                        String nombreCliente = (String) table.getValueAt(selectedRow, 5);
-                        String apellidoCliente = (String) table.getValueAt(selectedRow, 6);
+                        try {
+                            int idPrestamo = (int) table.getValueAt(selectedRow, 0);
+                            int idLibro = (int) table.getValueAt(selectedRow, 1);
+                            int idSucursal = (int) table.getValueAt(selectedRow, 2);
+                            LocalDate fechaPrestamo = LocalDate.parse(table.getValueAt(selectedRow, 3).toString());
+                            LocalDate fechaDevolucion = null;
+                            Object cellValue = table.getValueAt(selectedRow, 4);
+                            if (cellValue != null) {
+                                fechaDevolucion = LocalDate.parse(cellValue.toString());
+                            }
+                            String nombreCliente = (String) table.getValueAt(selectedRow, 5);
+                            String apellidoCliente = (String) table.getValueAt(selectedRow, 6);
+                            lblSeleccionado.setText("Seleccionado: ID Préstamo = " + idPrestamo + ", Cliente = " + nombreCliente + " " + apellidoCliente);
 
-                        lblSeleccionado.setText("Seleccionado: ID Préstamo = " + idPrestamo + ", Cliente = " + nombreCliente + " " + apellidoCliente);
-
-                        prestamoSeleccionado = new Prestamos(idPrestamo, idLibro, idSucursal, LocalDate.parse(fechaPrestamo), fechaDevolucion != null ? LocalDate.parse(fechaDevolucion) : null, nombreCliente, apellidoCliente);
+                            prestamoSeleccionado = new Prestamos(idPrestamo, idLibro, idSucursal, fechaPrestamo, fechaDevolucion, nombreCliente, apellidoCliente);
+                        } catch (DateTimeParseException | ClassCastException ex) {
+                            JOptionPane.showMessageDialog(null, "Error al seleccionar el préstamo: ");
+                            ((Throwable) ex).printStackTrace();
+                        }
                     }
                 }
             }
@@ -125,7 +140,7 @@ public class PantallaPrestamos extends JFrame {
                 prestamo.getIdLibro(),
                 prestamo.getIdSucursal(),
                 prestamo.getFechaPrestamo(),
-                prestamo.getFechaDevolucion() != null ? prestamo.getFechaDevolucion() : "No devuelto",
+                prestamo.getFechaDevolucion(),
                 prestamo.getNombreCliente(),
                 prestamo.getApellidoCliente()
             });
