@@ -33,11 +33,6 @@ public class Gerente extends Usuario {
 		this.dni = dni;
 		this.idSucursal_fk = idSucursal_fk;
 	}
-
-	public Gerente(String text, String text2, String text3, String text4, String text5, int parseInt,
-			Object selectedItem) {
-		
-	}
 	
 	@Override
 	public String toString() {

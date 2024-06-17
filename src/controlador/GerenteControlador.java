@@ -75,7 +75,7 @@ public class GerenteControlador implements GerenteRepository {
             e.printStackTrace();
         } 
     }
-
+	
 	@Override
 	public Gerente updateGerente(Gerente gerente) {
 		// TODO Auto-generated method stub

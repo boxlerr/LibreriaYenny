@@ -151,9 +151,9 @@ public class Agregar extends JFrame {
 	lblErrorDNIINvalido.setVisible(false);
 	
 	inpNombre = new JTextField();
+	inpNombre.setColumns(10);
 	inpNombre.setBounds(46, 48, 148, 29);
 	contentPane.add(inpNombre);
-	inpNombre.setColumns(10);
 	
 	inpApellido = new JTextField();
 	inpApellido.setColumns(10);
@@ -305,31 +305,37 @@ public class Agregar extends JFrame {
 				lblErrorDNIINvalido.setVisible(true);
 			}
 	
-	
 			if (flagMailExistencia && flagMailValido && flagContrasenaCaracteres && flagContrasenaNumeros && flagContrasenaBlank &&
 			!inpNombre.getText().isBlank() && controlador.verificarNumeros(inpNombre.getText())==false && !inpApellido.getText().isBlank() &&
 			controlador.verificarNumeros(inpApellido.getText())==false && flagDNIValido) {
+			
+			Usuario nuevoUsuario = new Usuario(inpMail.getText(), inpContrasena.getText(), (String) ListaTipo.getSelectedItem());
+			controlador.addUser(nuevoUsuario);
+			
+			int idSucursal_fk = Integer.parseInt((String) ListaIdSucursal.getSelectedItem());
+			
+			switch ((String) ListaTipo.getSelectedItem()) {
+			case "Gerente":
+				Gerente nuevoGerente = new Gerente(inpMail.getText(), inpContrasena.getText(), "Gerente", inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText()), idSucursal_fk);
+				gerenteControlador.addGerente(nuevoGerente, nuevoUsuario);
 				
-			controlador.addUser(new Usuario(inpMail.getText(), inpContrasena.getText(), ListaTipo.getSelectedItem()));
-	
-			if (ListaTipo.getSelectedItem().equals("Gerente")) {
-				gerenteControlador.addGerente(new Gerente(inpMail.getText(), inpContrasena.getText(), "Gerente", inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText()), ListaIdSucursal.getSelectedItem()), controlador.getUserById(inpMail.getName(), inpContrasena.getText()));
+				break;
+
+			case "Empleado":
+				Empleado nuevoEmpleado = new Empleado(inpMail.getText(), inpContrasena.getText(), "Empleado", inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText()), idSucursal_fk);
+				empleadoControlador.addEmpleado(nuevoEmpleado, nuevoUsuario);
+				break;
+				
+			case "Escritor":
+				escritorControlador.addEscritor(controlador.getUserById(inpMail.getText(), inpContrasena.getText()), new Escritor(inpMail.getText(), inpContrasena.getText(), "Escritor",
+                        inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText())));
+				break;
 			}
-	
-			if (ListaTipo.getSelectedItem().equals("Empleado")) {
-				empleadoControlador.addEmpleado(new Empleado(inpMail.getText(), inpContrasena.getText(), "Empleado", inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText()), ListaIdSucursal.getSelectedItem()), controlador.getUserById(inpMail.getText(), inpContrasena.getText()));
-			}
-	
-			if (ListaTipo.getSelectedItem().equals("Escritor")) {
-				escritorControlador.addEscritor(controlador.getUserById(inpMail.getText(), inpContrasena.getText()), new Escritor(inpMail.getText(), inpContrasena.getText(), "Escritor", inpNombre.getText(), inpApellido.getText(), Integer.parseInt(inpDni.getText())));
-	
-			}
-	
+			
 			dispose();
 			PantallaCuentas pantallaCuentas = new PantallaCuentas();
 	
 	}
-	
 	
 	}
 	});
@@ -337,12 +343,11 @@ public class Agregar extends JFrame {
 	
 	
 	JButton btnCancelar = new JButton("Cancelar");
-	btnCancelar.setBounds(272, 277, 89, 45);
-	btnCancelar.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-	dispose();
-	PantallaCuentas pantallaCuentas = new PantallaCuentas();
-	
+		btnCancelar.setBounds(272, 277, 89, 45);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaCuentas pantallaCuentas = new PantallaCuentas();
 	}
 	
 	});

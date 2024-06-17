@@ -32,11 +32,6 @@ import java.util.Set;
 			this.dni = dni;
 			this.idSucursal_fk = idSucursal_fk;
 		}
-	
-		public Empleado(String text, String text2, String tipo, String text3, String text4, int parseInt,
-				Object selectedItem) {
-
-		}
 		
 		@Override
 		public String toString() {
