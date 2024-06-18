@@ -96,8 +96,8 @@ public class PantallaEmpleado extends JFrame {
         JButton btnVerVentas = new JButton("Ver Ventas");
         btnVerVentas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
-                tablaVentas tablaVentas = new tablaVentas();
+            	dispose();
+                verVentas();
             }
         });
         btnVerVentas.setBounds(234, 214, 153, 34);
@@ -143,10 +143,17 @@ public class PantallaEmpleado extends JFrame {
     }
 
     private void verVentas() {
-    	dispose();
-        tablaVentas tablaventas = new tablaVentas();
+    	EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    tablaVentas frame = new tablaVentas();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
-
     private void cerrarSesion() {
         JOptionPane.showMessageDialog(this, "Gracias por usar el software de Yenny.");
         dispose();
