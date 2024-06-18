@@ -51,7 +51,7 @@ public class tablaVentas extends JFrame {
     }
 
     public tablaVentas() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 909, 500); // Adjusted height for better layout
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
