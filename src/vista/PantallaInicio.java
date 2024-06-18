@@ -125,7 +125,7 @@ public class PantallaInicio extends JFrame {
 						dispose();
 						PantallaGerente pantallaGerente = new PantallaGerente();
 						break;
-					case "empleado":
+					case "empleado"	:
 						dispose();
 						PantallaEmpleado pantallaempleado = new PantallaEmpleado();
 

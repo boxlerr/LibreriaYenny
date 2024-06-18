@@ -14,5 +14,6 @@ public interface VentasRepository {
 	List<Ventas> obtenerListaVentas();
 	boolean deleteVenta(int id);
 	boolean updateVenta(Ventas updateVenta);
+	boolean existeEmpleado(int idEmpleado);
 
 }
