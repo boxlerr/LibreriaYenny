@@ -144,7 +144,8 @@ public class VentasControlador implements VentasRepository {
 @Override
     public boolean updateVenta(Ventas updateVenta) {
         try {            
-            PreparedStatement statement = connection.prepareStatement("UPDATE ventas SET idLibro = ?, idEmpleado = ?, cantidad = ?, valorUnitario = ?, valorTotal = ?, fechaVenta = ? WHERE idVenta = ?");       
+            PreparedStatement statement = connection.prepareStatement("UPDATE ventas SET idLibro = ?, idEmpleado = ?, "
+            		+ "cantidad = ?, valorUnitario = ?, valorTotal = ?, fechaVenta = ? WHERE idVenta = ?");       
             statement.setInt(1, updateVenta.getIdLibro());
             statement.setInt(2, updateVenta.getIdEmpleado());
             statement.setInt(3, updateVenta.getCantidad());
@@ -164,5 +165,35 @@ public class VentasControlador implements VentasRepository {
         }
         return false;
     }
+@Override
+public boolean existeEmpleado(int idEmpleado) {
+    try {
+         PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM empleado WHERE idEmpleado = ?");
+        ps.setInt(1, idEmpleado);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+	return false;
+}
+
+public boolean existeLibro(int idLibro) {
+	try {
+        PreparedStatement ps = connection.prepareStatement("SELECT COUNT(*) FROM libro WHERE idLibro = ?");
+       ps.setInt(1, idLibro);
+       try (ResultSet rs = ps.executeQuery()) {
+           if (rs.next()) {
+               return rs.getInt(1) > 0;
+           }
+       }
+   } catch (SQLException e) {
+       e.printStackTrace();
+   }
+	return false;
+}
 
 }
