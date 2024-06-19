@@ -84,4 +84,50 @@ public class PrestamoControlador implements PrestamoRepository {
         }
         return listaPrestamos;
     }
+    public List<Prestamos> PrestamoporID(int id) {
+        List<Prestamos> listaPrestamos = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM prestamos WHERE idPrestamo = ?")) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Prestamos prestamo = new Prestamos(
+                    rs.getInt("idPrestamo"),
+                    rs.getInt("idLibro"),
+                    rs.getInt("idSucursal_fk"),
+                    rs.getDate("fechaPrestamo").toLocalDate(),
+                    rs.getDate("fechaDevolucion") != null ? rs.getDate("fechaDevolucion").toLocalDate() : null,
+                    rs.getString("Nombre_cliente"),
+                    rs.getString("Apellido_cliente")
+                );
+                listaPrestamos.add(prestamo);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listaPrestamos;
+    }
+
+    public List<Prestamos> PrestramoporNombre(String nombre) {
+        List<Prestamos> listaPrestamos = new ArrayList<>();
+        try (PreparedStatement stmt = connection.prepareStatement("SELECT * FROM prestamos WHERE Nombre_cliente LIKE ?")) {
+            stmt.setString(1, "%" + nombre + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Prestamos prestamo = new Prestamos(
+                    rs.getInt("idPrestamo"),
+                    rs.getInt("idLibro"),
+                    rs.getInt("idSucursal_fk"),
+                    rs.getDate("fechaPrestamo").toLocalDate(),
+                    rs.getDate("fechaDevolucion") != null ? rs.getDate("fechaDevolucion").toLocalDate() : null,
+                    rs.getString("Nombre_cliente"),
+                    rs.getString("Apellido_cliente")
+                );
+                listaPrestamos.add(prestamo);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return listaPrestamos;
+    }
+
 }

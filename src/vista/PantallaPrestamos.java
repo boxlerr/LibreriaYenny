@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -20,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class PantallaPrestamos extends JFrame {
 
@@ -29,6 +33,8 @@ public class PantallaPrestamos extends JFrame {
     private DefaultTableModel model;
     private PrestamoControlador prestamoControlador;
     private Prestamos prestamoSeleccionado;
+    private JTextField inpFiltrarId;
+    private JTextField inpFiltrarNombre;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -44,13 +50,12 @@ public class PantallaPrestamos extends JFrame {
     }
 
     public PantallaPrestamos() {
-		this.setVisible(true);
+        setTitle("Gestión de Préstamos");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, 400);
+        setBounds(100, 100, 650, 500);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
-        contentPane.setLayout(null);
 
         prestamoControlador = new PrestamoControlador();
 
@@ -60,17 +65,13 @@ public class PantallaPrestamos extends JFrame {
         actualizarTabla();
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(10, 24, 564, 256);
-        contentPane.add(scrollPane);
 
         JLabel lblSeleccionado = new JLabel("Seleccionado:");
-        lblSeleccionado.setBounds(10, 7, 564, 14);
-        contentPane.add(lblSeleccionado);
+        lblSeleccionado.setFont(new Font("Tahoma", Font.BOLD, 12));
 
         JButton btnDevolver = new JButton("Devolver");
-        btnDevolver.setBounds(10, 291, 100, 43);
         btnDevolver.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if (prestamoSeleccionado != null) {
                     try {
                         prestamoControlador.devolverLibro(prestamoSeleccionado.getIdPrestamo());
@@ -84,10 +85,7 @@ public class PantallaPrestamos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Seleccione un préstamo.");
                 }
             }
-        	
-        	//holaaa
         });
-        contentPane.add(btnDevolver);
 
         JButton btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
@@ -95,13 +93,11 @@ public class PantallaPrestamos extends JFrame {
                 dispose();
             }
         });
-        btnVolver.setBounds(474, 291, 100, 43);
-        contentPane.add(btnVolver);
 
         ListSelectionModel selectionModel = table.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         selectionModel.addListSelectionListener(new ListSelectionListener() {
-        	@Override
+            @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     int selectedRow = table.getSelectedRow();
@@ -123,17 +119,142 @@ public class PantallaPrestamos extends JFrame {
                             prestamoSeleccionado = new Prestamos(idPrestamo, idLibro, idSucursal, fechaPrestamo, fechaDevolucion, nombreCliente, apellidoCliente);
                         } catch (DateTimeParseException | ClassCastException ex) {
                             JOptionPane.showMessageDialog(null, "Error al seleccionar el préstamo: ");
-                            ((Throwable) ex).printStackTrace();
+                            ex.printStackTrace();
                         }
                     }
                 }
             }
         });
+
+        JLabel lblFiltrarId = new JLabel("Ingrese un ID para filtrar:");
+        JLabel lblFiltrarNombre = new JLabel("Ingrese un nombre para filtrar:");
+
+        inpFiltrarId = new JTextField();
+        inpFiltrarId.setColumns(10);
+
+        inpFiltrarNombre = new JTextField();
+        inpFiltrarNombre.setColumns(10);
+
+        JButton btnFiltrarId = new JButton("Filtrar");
+        btnFiltrarId.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int id = Integer.parseInt(inpFiltrarId.getText());
+                    filtrarId(id);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Ingrese un ID válido.");
+                }
+            }
+        });
+
+        JButton btnFiltrarNombre = new JButton("Filtrar");
+        btnFiltrarNombre.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                filtrarNombre(inpFiltrarNombre.getText());
+            }
+        });
+
+        JButton btnBorrarFiltros = new JButton("Borrar Filtros");
+        btnBorrarFiltros.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnBorrarFiltros.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actualizarTabla();
+                inpFiltrarId.setText(null);
+                inpFiltrarNombre.setText(null);
+            }
+        });
+
+        // GroupLayout
+        GroupLayout gl_contentPane = new GroupLayout(contentPane);
+        gl_contentPane.setHorizontalGroup(
+            gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_contentPane.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                        .addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                        .addComponent(lblSeleccionado, GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                .addComponent(lblFiltrarId)
+                                .addComponent(inpFiltrarId, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFiltrarId, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+                            .addGap(18)
+                            .addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+                                .addComponent(lblFiltrarNombre)
+                                .addComponent(inpFiltrarNombre, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFiltrarNombre, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(gl_contentPane.createSequentialGroup()
+                            .addComponent(btnDevolver, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18)
+                            .addComponent(btnBorrarFiltros, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap())
+        );
+        gl_contentPane.setVerticalGroup(
+            gl_contentPane.createParallelGroup(Alignment.LEADING)
+                .addGroup(gl_contentPane.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(lblSeleccionado)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
+                    .addGap(18)
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(lblFiltrarId)
+                        .addComponent(lblFiltrarNombre))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(inpFiltrarId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(inpFiltrarNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(btnFiltrarId)
+                        .addComponent(btnFiltrarNombre))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(btnDevolver, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnBorrarFiltros, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(24, Short.MAX_VALUE))
+        );
+        contentPane.setLayout(gl_contentPane);
     }
 
     private void actualizarTabla() {
         model.setRowCount(0);
         List<Prestamos> prestamos = prestamoControlador.obtenerListaPrestamos();
+        for (Prestamos prestamo : prestamos) {
+            model.addRow(new Object[]{
+                prestamo.getIdPrestamo(),
+                prestamo.getIdLibro(),
+                prestamo.getIdSucursal(),
+                prestamo.getFechaPrestamo(),
+                prestamo.getFechaDevolucion(),
+                prestamo.getNombreCliente(),
+                prestamo.getApellidoCliente()
+            });
+        }
+    }
+
+    private void filtrarId(int id) {
+        model.setRowCount(0);
+        List<Prestamos> prestamos = prestamoControlador.PrestamoporID(id);
+        for (Prestamos prestamo : prestamos) {
+            model.addRow(new Object[]{
+                prestamo.getIdPrestamo(),
+                prestamo.getIdLibro(),
+                prestamo.getIdSucursal(),
+                prestamo.getFechaPrestamo(),
+                prestamo.getFechaDevolucion(),
+                prestamo.getNombreCliente(),
+                prestamo.getApellidoCliente()
+            });
+        }
+    }
+
+    private void filtrarNombre(String nombre) {
+        model.setRowCount(0);
+        List<Prestamos> prestamos = prestamoControlador.PrestramoporNombre(nombre);
         for (Prestamos prestamo : prestamos) {
             model.addRow(new Object[]{
                 prestamo.getIdPrestamo(),
