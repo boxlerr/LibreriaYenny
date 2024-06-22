@@ -50,6 +50,8 @@ public class PantallaGerente extends JFrame {
 		JButton btnAdministrarLibros = new JButton("Administrar Libros");
 		btnAdministrarLibros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaAdministrarLibros pantallaAdministrarLibros = new PantallaAdministrarLibros();
 			}
 		});
 		btnAdministrarLibros.setBounds(40, 96, 154, 34);
@@ -76,6 +78,12 @@ public class PantallaGerente extends JFrame {
 		contentPane.add(btnVerInventario);
 		
 		JButton btnAplicarDescuento = new JButton("Aplicar Descuento");
+		btnAplicarDescuento.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PantallaAplicarDescuento pantallaAplicarDescuento = new PantallaAplicarDescuento();
+			}
+		});
 		btnAplicarDescuento.setBounds(233, 155, 155, 32);
 		contentPane.add(btnAplicarDescuento);
 		
