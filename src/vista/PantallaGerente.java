@@ -40,8 +40,6 @@ public class PantallaGerente extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		
 		JLabel lblQueDeseaHacer = new JLabel("¿Que desea hacer?");
 		lblQueDeseaHacer.setFont(new Font("Arial", Font.BOLD, 16));
 		lblQueDeseaHacer.setBounds(143, 24, 155, 32);

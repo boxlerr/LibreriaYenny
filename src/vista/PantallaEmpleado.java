@@ -5,15 +5,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.util.List;
-import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
-import controlador.*;
-import modelos.*;
 
 public class PantallaEmpleado extends JFrame {
 
@@ -34,7 +30,7 @@ public class PantallaEmpleado extends JFrame {
     }
 
     public PantallaEmpleado() { 
-		this.setVisible(true);
+        this.setVisible(true);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 400);  // Aumentar el tamaño de la ventana
@@ -63,7 +59,7 @@ public class PantallaEmpleado extends JFrame {
                 prestarLibro();
             }
         });
-        btnPrestarLibro.setBounds(46, 155, 142, 34);
+        btnPrestarLibro.setBounds(234, 96, 153, 34);
         contentPane.add(btnPrestarLibro);
 
         JButton btnVerInventario = new JButton("Ver Inventario");
@@ -72,17 +68,8 @@ public class PantallaEmpleado extends JFrame {
                 verInventario();
             }
         });
-        btnVerInventario.setBounds(234, 96, 153, 34);
+        btnVerInventario.setBounds(46, 155, 142, 34);
         contentPane.add(btnVerInventario);
-
-        JButton btnRegistrarDevolucion = new JButton("Registrar Devolución");
-        btnRegistrarDevolucion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                registrarDevolucion();
-            }
-        });
-        btnRegistrarDevolucion.setBounds(234, 155, 153, 34);
-        contentPane.add(btnRegistrarDevolucion);
 
         JButton btnVerPrestamos = new JButton("Ver Préstamos");
         btnVerPrestamos.addActionListener(new ActionListener() {
@@ -90,17 +77,16 @@ public class PantallaEmpleado extends JFrame {
                 verPrestamos();
             }
         });
-        btnVerPrestamos.setBounds(46, 214, 153, 34);
+        btnVerPrestamos.setBounds(234, 155, 153, 34);
         contentPane.add(btnVerPrestamos);
 
         JButton btnVerVentas = new JButton("Ver Ventas");
         btnVerVentas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	dispose();
                 verVentas();
             }
         });
-        btnVerVentas.setBounds(234, 214, 153, 34);
+        btnVerVentas.setBounds(46, 214, 153, 34);
         contentPane.add(btnVerVentas);
 
         JButton btnCerrarSesion = new JButton("Cerrar Sesión");
@@ -109,24 +95,39 @@ public class PantallaEmpleado extends JFrame {
                 cerrarSesion();
             }
         });
-        btnCerrarSesion.setBounds(162, 275, 117, 34);
+        btnCerrarSesion.setBounds(234, 214, 153, 34);
         contentPane.add(btnCerrarSesion);
     }
 
     private void venderLibro() {
         // Implementación del método venderLibro basado en tu código original
+        // Aquí deberías abrir la pantalla de vender libro
     }
 
     private void prestarLibro() {
-        // Implementación del método prestarLibro basado en tu código original
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    PantallaHacerPrestamo frame = new PantallaHacerPrestamo();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void verInventario() {
-        // Implementación del método verInventario basado en tu código original
-    }
-
-    private void registrarDevolucion() {
-        // Implementación del método registrarDevolucion basado en tu código original
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    PantallaVerInventario frame = new PantallaVerInventario();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     private void verPrestamos() {
@@ -143,7 +144,7 @@ public class PantallaEmpleado extends JFrame {
     }
 
     private void verVentas() {
-    	EventQueue.invokeLater(new Runnable() {
+        EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     tablaVentas frame = new tablaVentas();
@@ -154,6 +155,7 @@ public class PantallaEmpleado extends JFrame {
             }
         });
     }
+
     private void cerrarSesion() {
         JOptionPane.showMessageDialog(this, "Gracias por usar el software de Yenny.");
         dispose();

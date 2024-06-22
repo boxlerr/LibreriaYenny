@@ -46,6 +46,7 @@ public class Registrarse extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * 
 	 */
 	public Registrarse() {
 		UsuarioControlador usuarioControlador = new UsuarioControlador();
