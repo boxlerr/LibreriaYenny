@@ -100,9 +100,19 @@ public class PantallaEmpleado extends JFrame {
     }
 
     private void venderLibro() {
-        // Implementación del método venderLibro basado en tu código original
-        // Aquí deberías abrir la pantalla de vender libro
+    	EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    pantallaVender frame = new pantallaVender();
+                    dispose();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
+    
 
     private void prestarLibro() {
         EventQueue.invokeLater(new Runnable() {
@@ -148,6 +158,7 @@ public class PantallaEmpleado extends JFrame {
             public void run() {
                 try {
                     tablaVentas frame = new tablaVentas();
+                    dispose();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

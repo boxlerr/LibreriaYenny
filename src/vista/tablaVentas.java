@@ -34,7 +34,7 @@ public class tablaVentas extends JFrame {
     private Ventas seleccionado;
     private JButton btnEditar;
     private JButton eliminarBtn;
-    private JButton btnRealizarVenta; // Nuevo botón
+    private JButton btnVolver;
     private JTextField filterIdLibro;
     private JTextField filterIdEmpleado;
 
@@ -53,6 +53,7 @@ public class tablaVentas extends JFrame {
 
     public tablaVentas() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(900, 400);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(null);
@@ -97,6 +98,19 @@ public class tablaVentas extends JFrame {
         });
         contentPane.add(btnFiltrar);
 
+        btnEditar = new JButton("Editar");
+        btnEditar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (seleccionado.getIdVenta() != 0) {
+                    datoAModificar();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione una venta");
+                }
+            }
+        });
+        btnEditar.setBounds(50, 280, 160, 58);
+        contentPane.add(btnEditar);
+
         eliminarBtn = new JButton("Eliminar");
         eliminarBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -109,39 +123,17 @@ public class tablaVentas extends JFrame {
                 }
             }
         });
-        eliminarBtn.setBounds(50, 280, 160, 58);
+        eliminarBtn.setBounds(230, 280, 160, 58);
         contentPane.add(eliminarBtn);
 
-        btnEditar = new JButton("Editar");
-        btnEditar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (seleccionado.getIdVenta() != 0) {
-                    datoAModificar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Seleccione una venta");
-                }
-            }
-        });
-        btnEditar.setBounds(230, 280, 160, 58);
-        contentPane.add(btnEditar);
-
-        btnRealizarVenta = new JButton("Realizar Venta");
-        btnRealizarVenta.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                realizarVenta();
-            }
-        });
-        btnRealizarVenta.setBounds(410, 280, 160, 58); 
-        contentPane.add(btnRealizarVenta);
-
-        JButton btnVolver = new JButton("Volver");
+        btnVolver = new JButton("Volver");
         btnVolver.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 PantallaEmpleado pantallaEmpleado = new PantallaEmpleado();
             }
         });
-        btnVolver.setBounds(590, 280, 160, 58);
+        btnVolver.setBounds(410, 280, 160, 58);
         contentPane.add(btnVolver);
 
         ListSelectionModel selectionModel = table.getSelectionModel();
@@ -277,82 +269,6 @@ public class tablaVentas extends JFrame {
                     }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Por favor ingrese valores válidos.");
-                }
-            }
-        });
-        dialog.getContentPane().add(saveButton);
-        dialog.setVisible(true);
-    }
-
-    private void realizarVenta() {
-        JFrame dialog = new JFrame("Realizar Venta");
-        dialog.setSize(400, 400);
-        dialog.getContentPane().setLayout(null);
-
-        JLabel lblIdLibro = new JLabel("ID Libro:");
-        lblIdLibro.setBounds(10, 10, 80, 25);
-        dialog.getContentPane().add(lblIdLibro);
-
-        JTextField fieldIdLibro = new JTextField();
-        fieldIdLibro.setBounds(100, 10, 160, 25);
-        dialog.getContentPane().add(fieldIdLibro);
-
-        JLabel lblIdEmpleado = new JLabel("ID Empleado:");
-        lblIdEmpleado.setBounds(10, 40, 80, 25);
-        dialog.getContentPane().add(lblIdEmpleado);
-
-        JTextField fieldIdEmpleado = new JTextField();
-        fieldIdEmpleado.setBounds(100, 40, 160, 25);
-        dialog.getContentPane().add(fieldIdEmpleado);
-
-        JLabel lblCantidad = new JLabel("Cantidad:");
-        lblCantidad.setBounds(10, 70, 80, 25);
-        dialog.getContentPane().add(lblCantidad);
-
-        JTextField fieldCantidad = new JTextField();
-        fieldCantidad.setBounds(100, 70, 160, 25);
-        dialog.getContentPane().add(fieldCantidad);
-
-        JLabel lblValorUnitario = new JLabel("Valor Unitario:");
-        lblValorUnitario.setBounds(10, 100, 80, 25);
-        dialog.getContentPane().add(lblValorUnitario);
-
-        JTextField fieldValorUnitario = new JTextField();
-        fieldValorUnitario.setBounds(100, 100, 160, 25);
-        dialog.getContentPane().add(fieldValorUnitario);
-
-        JButton saveButton = new JButton("Realizar");
-        saveButton.setBounds(100, 150, 100, 25);
-        saveButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    int idLibro = Integer.parseInt(fieldIdLibro.getText());
-                    int idEmpleado = Integer.parseInt(fieldIdEmpleado.getText());
-                    int cantidad = Integer.parseInt(fieldCantidad.getText());
-                    double valorUnitario = Double.parseDouble(fieldValorUnitario.getText());
-                    double valorTotal = cantidad * valorUnitario;
-                    LocalDate fechaVenta = LocalDate.now();
-                    if (!controlador.existeLibro(idLibro)) {
-                        JOptionPane.showMessageDialog(null, "El ID del libro no existe.");
-                        return;
-                    }
-                    if (!controlador.existeEmpleado(idEmpleado)) {
-                        JOptionPane.showMessageDialog(null, "El ID del empleado no existe.");
-                        return;
-                    }
-
-                    Ventas nuevaVenta = new Ventas(0, idLibro, idEmpleado, cantidad, valorUnitario, valorTotal, fechaVenta);
-
-                    if (controlador.registrarVenta(nuevaVenta)) {
-                        actualizarTabla();
-                        JOptionPane.showMessageDialog(null, "Venta registrada exitosamente");
-                        dialog.dispose();
-                        
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al realizar la venta");
-                    }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Por favor ingrese datos válidos.");
                 }
             }
         });
