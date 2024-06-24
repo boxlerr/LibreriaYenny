@@ -9,5 +9,6 @@ public interface  PrestamoRepository {
 	void devolverLibro(int idPrestamo);
 	List<Prestamos> obtenerListaPrestamos();
 	void realizarPrestamo(int idLibro, int idSucursal, String nombreCliente, String apellidoCliente);
+	void eliminarPrestamo(int idPrestamo);
 	
 }

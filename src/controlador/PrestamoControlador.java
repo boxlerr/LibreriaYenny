@@ -42,6 +42,28 @@ public class PrestamoControlador implements PrestamoRepository {
             Logger.getLogger(PrestamoControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
+    public void eliminarPrestamo(int idPrestamo) {
+        try {
+            connection.setAutoCommit(false);
+            int idLibro = getIdLibroPorPrestamo(idPrestamo);
+            PreparedStatement psDelete = connection.prepareStatement("DELETE FROM prestamos WHERE idPrestamo = ?");
+            psDelete.setInt(1, idPrestamo);
+            psDelete.executeUpdate();
+            PreparedStatement psUpdate = connection.prepareStatement("UPDATE libro SET stock = stock + 1 WHERE idLibro = ?");
+            psUpdate.setInt(1, idLibro);
+            psUpdate.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException ex) {
+            try {
+                connection.rollback();
+            } catch (SQLException e) {
+                Logger.getLogger(PrestamoControlador.class.getName()).log(Level.SEVERE, null, e);
+            }
+            Logger.getLogger(PrestamoControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     @Override
     public void devolverLibro(int idPrestamo) {
@@ -106,6 +128,18 @@ public class PrestamoControlador implements PrestamoRepository {
         }
         return listaPrestamos;
     }
+    private int getIdLibroPorPrestamo(int idPrestamo) throws SQLException {
+        int idLibro = -1;
+        PreparedStatement psSelect = connection.prepareStatement("SELECT idLibro FROM prestamos WHERE idPrestamo = ?");
+        psSelect.setInt(1, idPrestamo);
+        try (ResultSet rs = psSelect.executeQuery()) {
+            if (rs.next()) {
+                idLibro = rs.getInt("idLibro");
+            }
+        }
+        return idLibro;
+    }
+
 
     public List<Prestamos> PrestramoporNombre(String nombre) {
         List<Prestamos> listaPrestamos = new ArrayList<>();
@@ -129,5 +163,6 @@ public class PrestamoControlador implements PrestamoRepository {
         }
         return listaPrestamos;
     }
+    
 
 }

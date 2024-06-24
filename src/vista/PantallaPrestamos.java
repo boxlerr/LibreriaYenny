@@ -94,6 +94,27 @@ public class PantallaPrestamos extends JFrame {
             }
         });
 
+        JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (prestamoSeleccionado != null) {
+                    int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro de que desea eliminar este préstamo?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+                    if (confirm == JOptionPane.YES_OPTION) {
+                        try {
+                            prestamoControlador.eliminarPrestamo(prestamoSeleccionado.getIdPrestamo());
+                            JOptionPane.showMessageDialog(null, "Préstamo eliminado con éxito.");
+                            actualizarTabla();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "Error al eliminar el préstamo: " + ex.getMessage());
+                            ex.printStackTrace();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Seleccione un préstamo.");
+                }
+            }
+        });
+
         ListSelectionModel selectionModel = table.getSelectionModel();
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         selectionModel.addListSelectionListener(new ListSelectionListener() {
@@ -186,6 +207,8 @@ public class PantallaPrestamos extends JFrame {
                         .addGroup(gl_contentPane.createSequentialGroup()
                             .addComponent(btnDevolver, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
                             .addGap(18)
+                            .addComponent(btnEliminar, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+                            .addGap(18)
                             .addComponent(btnBorrarFiltros, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
@@ -213,6 +236,7 @@ public class PantallaPrestamos extends JFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                     .addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
                         .addComponent(btnDevolver, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEliminar, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBorrarFiltros, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnVolver, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(24, Short.MAX_VALUE))
