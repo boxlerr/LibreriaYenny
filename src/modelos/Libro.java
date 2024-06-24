@@ -36,6 +36,9 @@ public class Libro {
 	public Libro() {
 		
 	}
+	public Libro(int idLibro, String titulo, String autor, Object genero, int stock, String precio,
+			Object idSucursal_fk) {
+	}
 	@Override
 	public String toString() {
 		return "Libro [idLibro=" + idLibro + ", titulo=" + titulo + ", autor=" + autor + ", genero=" + genero
