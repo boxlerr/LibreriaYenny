@@ -23,6 +23,8 @@ import controlador.LibroControlador;
 import controlador.UsuarioControlador;
 import modelos.*;
 import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.Color;
 
 public class PantallaAdministrarLibros extends JFrame {
 
@@ -30,7 +32,7 @@ public class PantallaAdministrarLibros extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
     private DefaultTableModel model;
-    private LibroControlador libroControlador;
+    private LibroControlador libroControlador = new LibroControlador();
     private Libro libroSeleccionado;
     private JTextField inpFiltroSucursal;
     private JTextField inpFiltrarGenero;
@@ -38,25 +40,6 @@ public class PantallaAdministrarLibros extends JFrame {
     private JTextField inpFiltrarTitulo;
    
     
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaAdministrarLibros frame = new PantallaAdministrarLibros();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public PantallaAdministrarLibros() {
 		this.setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,6 +152,56 @@ public class PantallaAdministrarLibros extends JFrame {
 		btnEliminarFiltros.setBounds(624, 414, 139, 43);
 		contentPane.add(btnEliminarFiltros);
 		
+		
+		
+		JLabel lblErrorLibro = new JLabel("Selecciona un libro");
+		lblErrorLibro.setVisible(false);
+		lblErrorLibro.setForeground(new Color(255, 0, 0));
+		lblErrorLibro.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblErrorLibro.setBounds(380, 367, 100, 14);
+		contentPane.add(lblErrorLibro);
+		
+		
+		JButton btnEliminarLibro = new JButton("Eliminar libro");
+		btnEliminarLibro.setBounds(347, 321, 139, 43);
+		btnEliminarLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (libroSeleccionado.getIdLibro()==0) {
+					lblErrorLibro.setVisible(true);
+				} else {
+					libroControlador.deleteLibro(libroSeleccionado.getIdLibro());
+					actualizarTabla();
+				}
+			}
+		});
+		contentPane.add(btnEliminarLibro);
+		
+		JButton btnEditarLibro = new JButton("Editar libro");
+		btnEditarLibro.setBounds(523, 321, 139, 43);
+		btnEditarLibro.addActionListener(new ActionListener( ) {
+			public void actionPerformed(ActionEvent e) {
+				if (libroSeleccionado.getIdLibro()==0) {
+					lblErrorLibro.setVisible(true);
+				} else {
+					dispose();
+					EditarLibro editarLibro = new EditarLibro(libroSeleccionado);
+					actualizarTabla();
+				}
+			}
+		});
+		contentPane.add(btnEditarLibro);
+		
+		JButton btnAgregarLibro = new JButton("Agregar libro");
+		btnAgregarLibro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					dispose();
+					AgregarLibro agregarLibro = new AgregarLibro();
+					actualizarTabla();
+			}
+		});
+		btnAgregarLibro.setBounds(172, 321, 139, 43);
+		contentPane.add(btnAgregarLibro);
+		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,21 +211,6 @@ public class PantallaAdministrarLibros extends JFrame {
 		});
 		btnVolver.setBounds(762, 321, 72, 43);
 		contentPane.add(btnVolver);
-		
-		JButton btnAgregarLibro = new JButton("Agregar libro");
-		btnAgregarLibro.setBounds(172, 321, 139, 43);
-		contentPane.add(btnAgregarLibro);
-		
-		JButton btnEliminarLibro = new JButton("Eliminar libro");
-		btnEliminarLibro.setBounds(347, 321, 139, 43);
-		contentPane.add(btnEliminarLibro);
-		
-		JButton btnEditarLibro = new JButton("Editar libro");
-		btnEditarLibro.setBounds(523, 321, 139, 43);
-		contentPane.add(btnEditarLibro);
-		
-		
-		
 		
 	
 		ListSelectionModel selectionModel = table.getSelectionModel();

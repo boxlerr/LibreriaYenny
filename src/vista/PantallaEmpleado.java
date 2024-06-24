@@ -119,6 +119,7 @@ public class PantallaEmpleado extends JFrame {
             public void run() {
                 try {
                     PantallaHacerPrestamo frame = new PantallaHacerPrestamo();
+                    dispose();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -132,6 +133,7 @@ public class PantallaEmpleado extends JFrame {
             public void run() {
                 try {
                     PantallaVerInventario frame = new PantallaVerInventario();
+                    dispose();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -145,6 +147,7 @@ public class PantallaEmpleado extends JFrame {
             public void run() {
                 try {
                     PantallaPrestamos frame = new PantallaPrestamos();
+                    dispose();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
